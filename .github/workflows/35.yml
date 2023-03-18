@@ -105,7 +105,7 @@ jobs:
             NWN_IMAGE_BUILD_DATE=${{ steps.nwn.outputs.now }}
             NWN_VERSION=${{ steps.nwn.outputs.version }}
           labels: |
-            org.opencontainers.image.source https://github.com/urothis/nwserver}
+            org.opencontainers.image.source=https://github.com/urothis/nwserver
             com.nwn.revision=${{ steps.nwn.outputs.version }}
             com.nwn.version=${{ steps.nwn.outputs.version }}
             com.nwn.description="docker image for running a Neverwinter Nights 1 server on Linux"
