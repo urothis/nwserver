@@ -2,11 +2,16 @@
 
 Last updated: 20230318
 
-## Supported tags
+## Registries
+
+- `ghcr.io/urothis/nwserver:{A_TAG}`
+- `urothis/nwserver:{A_TAG}`
+
+## Tags
 
 - [`8193.35.36`](https://hub.docker.com/repository/docker/urothis/nwserver/tags)
 - [`8193.35`](https://hub.docker.com/repository/docker/urothis/nwserver/tags/8193.35)
-- [`8193`](https://hub.docker.com/repository/docker/urothis/nwserver/tags?page=1&ordering=last_updated)
+- [`8193`](https://hub.docker.com/repository/docker/urothis/nwserver/tags/8193)
 
 # <b>Where to file issues</b>
 
