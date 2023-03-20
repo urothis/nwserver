@@ -4,6 +4,8 @@ LABEL maintainer "urothis@gmail.com"
 ARG TARGETOS TARGETARCH NWN_IMAGE_BUILD_DATE NWN_VERSION
 COPY docker_data/data/data /nwn/data/data
 COPY docker_data/run-server.sh /nwn/run-server.sh
+COPY docker_data/prep-nwn-ini.awk /nwn/prep-nwn-ini.awk
+COPY docker_data/prep-nwnplayer-ini.awk /nwn/prep-nwnplayer-ini.awk
 COPY docker_data/data/bin/${TARGETOS}-${TARGETARCH}/nwserver /nwn/data/bin/${TARGETOS}-${TARGETARCH}/nwserver
 COPY docker_data/lang/ /nwn/data/lang/
 COPY DockerDemo.mod /nwn/data/data/mod/
