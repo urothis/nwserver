@@ -10,12 +10,7 @@ COPY docker_data/data/bin/${TARGETOS}-${TARGETARCH}/nwserver /nwn/data/bin/${TAR
 COPY docker_data/lang/ /nwn/data/lang/
 COPY DockerDemo.mod /nwn/data/data/mod/
 RUN apt-get update && \
-  apt-get --no-install-recommends -y install wget libc6 libstdc++6 && \
-  #workaround until nwnx is updated to use libssl3
-  wget http://security.ubuntu.com/ubuntu/pool/main/o/openssl/libssl1.1_1.1.1-1ubuntu2.1~18.04.21_amd64.deb && \
-  dpkg -i libssl1.1_1.1.1-1ubuntu2.1~18.04.21_amd64.deb && \
-  rm libssl1.1_1.1.1-1ubuntu2.1~18.04.21_amd64.deb && \
-  apt-get clean && \
+  apt-get --no-install-recommends -y install libc6 libstdc++6 && \
   rm -r /var/cache/apt /var/lib/apt/lists
 RUN mkdir -p /nwn/home /nwn/run
 RUN chmod +x /nwn/run-server.sh
