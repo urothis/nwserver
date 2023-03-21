@@ -10,7 +10,7 @@ COPY docker_data/data/bin/${TARGETOS}-${TARGETARCH}/nwserver /nwn/data/bin/${TAR
 COPY docker_data/lang/ /nwn/data/lang/
 COPY DockerDemo.mod /nwn/data/data/mod/
 RUN apt-get update && \
-  apt-get --no-install-recommends -y install libc6 libstdc++6 && \
+  apt-get --no-install-recommends -y install libc6 libstdc++6 libssl-dev && \
   rm -r /var/cache/apt /var/lib/apt/lists
 RUN mkdir -p /nwn/home /nwn/run
 RUN chmod +x /nwn/run-server.sh
