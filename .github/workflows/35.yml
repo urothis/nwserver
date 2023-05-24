@@ -66,14 +66,13 @@ jobs:
           WIN_BIN_DEPOT_ID: 704452
           LINUX_BIN_DEPOT_ID: 704454
           CONTENT_DEPOT_ID: 704451
-          BRANCH: development
           NWN_ROOT: ./
         run: |
           mkdir -p nwserver/docker_data/lang/en/data nwserver/docker_data/data/bin/linux-amd64 nwserver/docker_data/data/bin/linux-arm64 nwserver/docker_data/data/data/mod/
           cd DepotDownloader/DepotDownloader
-          dotnet run -app $APP_ID -depot $LINUX_BIN_DEPOT_ID -beta $BRANCH -username ${{ secrets.STEAM_USER }} -password ${{ secrets.STEAM_PASS }}
-          dotnet run -app $APP_ID -depot $WIN_BIN_DEPOT_ID   -beta $BRANCH -username ${{ secrets.STEAM_USER }} -password ${{ secrets.STEAM_PASS }}
-          dotnet run -app $APP_ID -depot $CONTENT_DEPOT_ID   -beta $BRANCH -username ${{ secrets.STEAM_USER }} -password ${{ secrets.STEAM_PASS }}
+          dotnet run -app $APP_ID -depot $LINUX_BIN_DEPOT_ID -username ${{ secrets.STEAM_USER }} -password ${{ secrets.STEAM_PASS }}
+          dotnet run -app $APP_ID -depot $WIN_BIN_DEPOT_ID -username ${{ secrets.STEAM_USER }} -password ${{ secrets.STEAM_PASS }}
+          dotnet run -app $APP_ID -depot $CONTENT_DEPOT_ID -username ${{ secrets.STEAM_USER }} -password ${{ secrets.STEAM_PASS }}
           cd depots/$CONTENT_DEPOT_ID/$BUILD_ID/
           nwn_resman_pkg --userdirectory . -d $GITHUB_WORKSPACE/nwserver/docker_data/data/data
           cd $GITHUB_WORKSPACE
