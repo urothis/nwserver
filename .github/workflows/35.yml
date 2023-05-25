@@ -101,6 +101,32 @@ jobs:
             linux/arm64
           push: true
           build-args: |
+            DEBIAN_TAG="bullseye-slim"
+            NWN_IMAGE_BUILD_DATE=${{ steps.nwn.outputs.now }}
+            NWN_VERSION=${{ steps.nwn.outputs.version }}
+          labels: |
+            org.opencontainers.image.source=https://github.com/urothis/nwserver
+            com.nwn.revision=${{ steps.nwn.outputs.version }}
+            com.nwn.version=${{ steps.nwn.outputs.version }}
+            com.nwn.description="docker image for running a Neverwinter Nights 1 server on Linux"
+          tags: |
+            urothis/nwserver:${{ steps.nwn.outputs.version }}-bullseye
+            urothis/nwserver:${{ steps.nwn.outputs.major }}.${{ steps.nwn.outputs.minor }}-bullseye
+            urothis/nwserver:${{ steps.nwn.outputs.major }}-bullseye
+            ghcr.io/${{ github.repository }}:${{ steps.nwn.outputs.version }}-bullseye
+            ghcr.io/${{ github.repository }}:${{ steps.nwn.outputs.major }}.${{ steps.nwn.outputs.minor }}-bullseye
+            ghcr.io/${{ github.repository }}:${{ steps.nwn.outputs.major }}-bullseye
+      - name: Docker Build & Push
+        uses: docker/build-push-action@v3
+        with:
+          context: nwserver
+          file: Dockerfile
+          platforms: |
+            linux/amd64
+            linux/arm64
+          push: true
+          build-args: |
+            DEBIAN_TAG="buster-slim"
             NWN_IMAGE_BUILD_DATE=${{ steps.nwn.outputs.now }}
             NWN_VERSION=${{ steps.nwn.outputs.version }}
           labels: |
@@ -115,6 +141,13 @@ jobs:
             ghcr.io/${{ github.repository }}:${{ steps.nwn.outputs.version }}
             ghcr.io/${{ github.repository }}:${{ steps.nwn.outputs.major }}.${{ steps.nwn.outputs.minor }}
             ghcr.io/${{ github.repository }}:${{ steps.nwn.outputs.major }}
+            urothis/nwserver:${{ steps.nwn.outputs.version }}-buster
+            urothis/nwserver:${{ steps.nwn.outputs.major }}.${{ steps.nwn.outputs.minor }}-buster
+            urothis/nwserver:${{ steps.nwn.outputs.major }}-buster
+            ghcr.io/${{ github.repository }}:${{ steps.nwn.outputs.version }}-buster
+            ghcr.io/${{ github.repository }}:${{ steps.nwn.outputs.major }}.${{ steps.nwn.outputs.minor }}-buster
+            ghcr.io/${{ github.repository }}:${{ steps.nwn.outputs.major }}-buster
+
       # commit updated README
       - name: Commit updated README
         uses: EndBug/add-and-commit@v9
