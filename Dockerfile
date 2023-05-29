@@ -1,5 +1,5 @@
 # syntax=docker/dockerfile:1
-ARG DEBIAN_VERSION=bookworm-slim
+ARG DEBIAN_VERSION=buster-slim
 FROM debian:${DEBIAN_VERSION}
 LABEL maintainer "urothis@gmail.com"
 ARG TARGETOS TARGETARCH NWN_IMAGE_BUILD_DATE NWN_VERSION
