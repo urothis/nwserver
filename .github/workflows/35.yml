@@ -91,7 +91,7 @@ jobs:
           echo minor=$(semver get minor $(peres -v nwserver.exe -f csv | grep -v DEBUG | cut -d'.' -f2- | sed -n 2p)) >> $GITHUB_OUTPUT
           echo patch=$(semver get patch $(peres -v nwserver.exe -f csv | grep -v DEBUG | cut -d'.' -f2- | sed -n 2p)) >> $GITHUB_OUTPUT
       # docker
-      - name: Docker Build & Push
+      - name: Bookworm docker image
         uses: docker/build-push-action@v3
         with:
           context: nwserver
@@ -101,7 +101,32 @@ jobs:
             linux/arm64
           push: true
           build-args: |
-            DEBIAN_TAG="bullseye-slim"
+            DEBIAN_VERSION="bookworm-slim"
+            NWN_IMAGE_BUILD_DATE=${{ steps.nwn.outputs.now }}
+            NWN_VERSION=${{ steps.nwn.outputs.version }}
+          labels: |
+            org.opencontainers.image.source=https://github.com/urothis/nwserver
+            com.nwn.revision=${{ steps.nwn.outputs.version }}
+            com.nwn.version=${{ steps.nwn.outputs.version }}
+            com.nwn.description="docker image for running a Neverwinter Nights 1 server on Linux"
+          tags: |
+            urothis/nwserver:${{ steps.nwn.outputs.version }}-bookworm
+            urothis/nwserver:${{ steps.nwn.outputs.major }}.${{ steps.nwn.outputs.minor }}-bookworm
+            urothis/nwserver:${{ steps.nwn.outputs.major }}-bookworm
+            ghcr.io/${{ github.repository }}:${{ steps.nwn.outputs.version }}-bookworm
+            ghcr.io/${{ github.repository }}:${{ steps.nwn.outputs.major }}.${{ steps.nwn.outputs.minor }}-bookworm
+            ghcr.io/${{ github.repository }}:${{ steps.nwn.outputs.major }}-bookworm
+      - name: Bullseye docker image
+        uses: docker/build-push-action@v3
+        with:
+          context: nwserver
+          file: Dockerfile
+          platforms: |
+            linux/amd64
+            linux/arm64
+          push: true
+          build-args: |
+            DEBIAN_VERSION="bullseye-slim"
             NWN_IMAGE_BUILD_DATE=${{ steps.nwn.outputs.now }}
             NWN_VERSION=${{ steps.nwn.outputs.version }}
           labels: |
@@ -116,7 +141,7 @@ jobs:
             ghcr.io/${{ github.repository }}:${{ steps.nwn.outputs.version }}-bullseye
             ghcr.io/${{ github.repository }}:${{ steps.nwn.outputs.major }}.${{ steps.nwn.outputs.minor }}-bullseye
             ghcr.io/${{ github.repository }}:${{ steps.nwn.outputs.major }}-bullseye
-      - name: Docker Build & Push
+      - name: Buster docker image
         uses: docker/build-push-action@v3
         with:
           context: nwserver
@@ -126,7 +151,7 @@ jobs:
             linux/arm64
           push: true
           build-args: |
-            DEBIAN_TAG="buster-slim"
+            DEBIAN_VERSION="buster-slim"
             NWN_IMAGE_BUILD_DATE=${{ steps.nwn.outputs.now }}
             NWN_VERSION=${{ steps.nwn.outputs.version }}
           labels: |
