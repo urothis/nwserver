@@ -101,7 +101,7 @@ jobs:
             linux/arm64
           push: true
           build-args: |
-            DEBIAN_VERSION="bookworm-slim"
+            DEBIAN_VERSION=bookworm-slim
             NWN_IMAGE_BUILD_DATE=${{ steps.nwn.outputs.now }}
             NWN_VERSION=${{ steps.nwn.outputs.version }}
           labels: |
@@ -126,7 +126,7 @@ jobs:
             linux/arm64
           push: true
           build-args: |
-            DEBIAN_VERSION="bullseye-slim"
+            DEBIAN_VERSION=bullseye-slim
             NWN_IMAGE_BUILD_DATE=${{ steps.nwn.outputs.now }}
             NWN_VERSION=${{ steps.nwn.outputs.version }}
           labels: |
@@ -151,7 +151,7 @@ jobs:
             linux/arm64
           push: true
           build-args: |
-            DEBIAN_VERSION="buster-slim"
+            DEBIAN_VERSION=buster-slim
             NWN_IMAGE_BUILD_DATE=${{ steps.nwn.outputs.now }}
             NWN_VERSION=${{ steps.nwn.outputs.version }}
           labels: |
