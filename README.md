@@ -1,6 +1,6 @@
 # <b>nwserver</b>
 
-Last updated: 20230609
+Last updated: 20230616
 
 ## Registries
 
@@ -57,7 +57,7 @@ The following environmental variables can be used to gather data about your inst
 
 ```bash
 NWN_VERSION=8193.35.36
-NWN_IMAGE_BUILD_DATE=20230609
+NWN_IMAGE_BUILD_DATE=20230616
 ```
 
 Note that this distribution does not ship with any campaign- or DD (Premium) modules; just the bare necessities to run a custom module. Everything you want to serve needs to be in your server home directory.
