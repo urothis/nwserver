@@ -9,8 +9,8 @@ Last updated: 20231205
 
 ## Tags
 
-- [`8193.35.40`](https://hub.docker.com/repository/docker/urothis/nwserver/tags)
-- [`8193.35`](https://hub.docker.com/repository/docker/urothis/nwserver/tags/8193.35)
+- [`8193.36.7`](https://hub.docker.com/repository/docker/urothis/nwserver/tags)
+- [`8193.36`](https://hub.docker.com/repository/docker/urothis/nwserver/tags/8193.36)
 - [`8193`](https://hub.docker.com/repository/docker/urothis/nwserver/tags/8193)
 
 # <b>Where to file issues</b>
@@ -56,7 +56,7 @@ NWN_NWSYNCHASH=
 The following environmental variables can be used to gather data about your instance during runtime (with example output listed):
 
 ```bash
-NWN_VERSION=8193.35.36
+NWN_VERSION=8193.36.7
 NWN_IMAGE_BUILD_DATE=20231205
 ```
 
