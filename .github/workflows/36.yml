@@ -1,11 +1,11 @@
-name: Build nwserver Image 8193.35
+name: Build nwserver Image 8193.36
 on:
   workflow_dispatch:
   #schedule:
   #  - cron: '0 0 * * 5'
 jobs:
   nwserver:
-    name: Build nwserver 8193.35
+    name: Build nwserver 8193.36
     runs-on: ubuntu-latest
     env:
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
