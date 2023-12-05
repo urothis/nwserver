@@ -62,7 +62,7 @@ jobs:
         id: nwn
         env:
           APP_ID: 704450
-          BUILD_ID: 11253735
+          BUILD_ID: 12880199
           WIN_BIN_DEPOT_ID: 704452
           LINUX_BIN_DEPOT_ID: 704454
           CONTENT_DEPOT_ID: 704451
