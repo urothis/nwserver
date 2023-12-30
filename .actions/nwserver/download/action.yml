@@ -1,0 +1,43 @@
+name: "Download nwserver"
+inputs:
+  preview:
+    description: "Preview version"
+    required: true
+    type: boolean
+    default: false
+  steam_username:
+    description: "Steam username"
+    required: true
+    type: string
+  steam_password:
+    description: "Steam password"
+    required: true
+    type: string
+  output_path:
+    description: "Output path"
+    required: true
+    type: string
+runs:
+  using: "composite"
+  steps:
+    - uses: "actions/checkout@v3"
+    - name: Clone SteamRE/DepotDownloader
+      shell: bash
+      run: |
+        git clone https://github.com/SteamRE/DepotDownloader.git
+    - name: Download nwnee files
+      shell: bash
+      env:
+        APP_ID: 704450
+        BUILD_ID: 11253735
+        WIN_BIN_DEPOT_ID: 704452
+        LINUX_BIN_DEPOT_ID: 704454
+        CONTENT_DEPOT_ID: 704451
+        NWN_ROOT: ./
+      run: |
+        mkdir -p ${{ inputs.output_path }}/nwserver/lang/en/data ${{ inputs.output_path }}/nwserver/data/bin/linux-amd64 ${{ inputs.output_path }}/nwserver/data/bin/linux-arm64 ${{ inputs.output_path }}/nwserver/data/data/mod/
+        cd DepotDownloader/DepotDownloader
+        dotnet run -app 704450 -depot 704452 -username ${{ inputs.steam_username }} -password ${{ inputs.steam_password }}
+        dotnet run -app 704450 -depot 704454 -username ${{ inputs.steam_username }} -password ${{ inputs.steam_password }}
+        dotnet run -app 704450 -depot 704451 -username ${{ inputs.steam_username }} -password ${{ inputs.steam_password }}
+        ls -la depots/704451/

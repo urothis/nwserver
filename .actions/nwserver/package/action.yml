@@ -1,0 +1,36 @@
+name: "Parse nwserver"
+runs:
+  using: "composite"
+  steps:
+    - uses: "actions/checkout@v3"
+    - name: Install Dependencies
+      shell: bash
+      run: |
+        sudo apt install unzip pev
+        wget -O /usr/local/bin/semver https://raw.githubusercontent.com/fsaintjacques/semver-tool/master/src/semver
+        chmod +x /usr/local/bin/semver
+        wget -O nwn-nim.zip https://github.com/niv/neverwinter.nim/releases/download/1.7.1/neverwinter.linux.amd64.zip
+        unzip -j nwn-nim.zip nwn_resman_pkg -d /usr/local/bin/
+        chmod +x /usr/local/bin/nwn_resman_pkg
+        echo /usr/local/bin/ >> $GITHUB_PATH
+    - name: Download nwnee files
+      shell: bash
+      env:
+        APP_ID: 704450
+        BUILD_ID: 11253735
+        WIN_BIN_DEPOT_ID: 704452
+        LINUX_BIN_DEPOT_ID: 704454
+        CONTENT_DEPOT_ID: 704451
+        NWN_ROOT: ./
+      run: |
+        mkdir -p nwserver/docker_data/lang/en/data nwserver/docker_data/data/bin/linux-amd64 nwserver/docker_data/data/bin/linux-arm64 nwserver/docker_data/data/data/mod/
+        cd DepotDownloader/DepotDownloader
+        dotnet run -app 704450 -depot 704452 -username ${{ inputs.steam_username }} -password ${{ inputs.steam_password }}
+        dotnet run -app 704450 -depot 704454 -username ${{ inputs.steam_username }} -password ${{ inputs.steam_password }}
+        dotnet run -app 704450 -depot 704451 -username ${{ inputs.steam_username }} -password ${{ inputs.steam_password }}
+        cd depots/704451/11253735/
+        nwn_resman_pkg --userdirectory . -d $GITHUB_WORKSPACE/nwserver/docker_data/data/data
+        cd $GITHUB_WORKSPACE
+        cp DepotDownloader/DepotDownloader/depots/704454/11253735/bin/linux-x86/nwserver-linux nwserver/docker_data/data/bin/linux-amd64/nwserver
+        cp DepotDownloader/DepotDownloader/depots/704452/11253735/bin/win32/nwserver.exe nwserver.exe
+        cp DepotDownloader/DepotDownloader/depots/704454/11253735/bin/linux-arm64/nwserver-linux nwserver/docker_data/data/bin/linux-arm64/nwserver
