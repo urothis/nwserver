@@ -5,9 +5,18 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Download nwnee
+      - name: Download nwnee preview
         uses: ./.actions/nwserver/download/
         with:
           preview: true
           steam_username: ${{ secrets.STEAM_USER }}
           steam_password: ${{ secrets.STEAM_PASS }}
+          output_path: ${{ github.workspace }}/preview
+      - name: Download nwnee preview
+        uses: ./.actions/nwserver/download/
+        with:
+          preview: false
+          steam_username: ${{ secrets.STEAM_USER }}
+          steam_password: ${{ secrets.STEAM_PASS }}
+          output_path: ${{ github.workspace }}/stable
+
