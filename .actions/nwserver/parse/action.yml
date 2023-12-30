@@ -4,7 +4,7 @@ inputs:
     description: "Path to nwserver.exe"
     required: true
     type: string
-    default: "nwserver/nwserver.exe"
+    default: ${{ github.workspace }}/nwserver/data/bin/win32/nwserver.exe
 outputs:
   version: ${{ steps.nwn.outputs.version }}
   major: ${{ steps.nwn.outputs.major }}
@@ -23,7 +23,7 @@ runs:
       id: nwn
       shell: bash
       run: |
-        echo version=$(peres -v nwserver.exe -f csv | grep -v DEBUG | cut -d'.' -f2- | sed -n 2p) >> $GITHUB_OUTPUT
-        echo major=$(semver get major $(peres -v nwserver.exe -f csv | grep -v DEBUG | cut -d'.' -f2- | sed -n 2p)) >> $GITHUB_OUTPUT
-        echo minor=$(semver get minor $(peres -v nwserver.exe -f csv | grep -v DEBUG | cut -d'.' -f2- | sed -n 2p)) >> $GITHUB_OUTPUT
-        echo patch=$(semver get patch $(peres -v nwserver.exe -f csv | grep -v DEBUG | cut -d'.' -f2- | sed -n 2p)) >> $GITHUB_OUTPUT
+        echo version=$(peres -v ${{ inputs.path }} -f csv | grep -v DEBUG | cut -d'.' -f2- | sed -n 2p) >> $GITHUB_OUTPUT
+        echo major=$(semver get major $(peres -v ${{ inputs.path }} -f csv | grep -v DEBUG | cut -d'.' -f2- | sed -n 2p)) >> $GITHUB_OUTPUT
+        echo minor=$(semver get minor $(peres -v ${{ inputs.path }} -f csv | grep -v DEBUG | cut -d'.' -f2- | sed -n 2p)) >> $GITHUB_OUTPUT
+        echo patch=$(semver get patch $(peres -v ${{ inputs.path }} -f csv | grep -v DEBUG | cut -d'.' -f2- | sed -n 2p)) >> $GITHUB_OUTPUT

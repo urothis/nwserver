@@ -29,3 +29,8 @@ jobs:
           echo "major: ${{ steps.parse.outputs.major }}"
           echo "minor: ${{ steps.parse.outputs.minor }}"
           echo "patch: ${{ steps.parse.outputs.patch }}"
+      - name: Package nwserver files
+        id: package
+        uses: ./.actions/nwserver/package/
+        with:
+          input_path:     ${{ github.workspace }}/nwserver
