@@ -19,6 +19,8 @@ runs:
   steps:
     - uses: "actions/checkout@v3"
     - uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '7.x'
     - name: Clone SteamRE/DepotDownloader
       shell: bash
       run: |
