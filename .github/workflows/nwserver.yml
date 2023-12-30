@@ -1,0 +1,13 @@
+on:
+  pull_request:
+jobs:
+  build_push:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Download nwnee
+        uses: ./.actions/nwserver/download.yml
+        with:
+          preview: true
+          steam_user: ${{ secrets.STEAM_USER }}
+          steam_password: ${{ secrets.STEAM_PASS }}
