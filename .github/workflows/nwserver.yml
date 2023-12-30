@@ -5,7 +5,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        channel: [release, preview]
+        channel: [preview, release]
     steps:
       - uses: actions/checkout@v4
       - name: Download nwnee
