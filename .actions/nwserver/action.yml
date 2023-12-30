@@ -14,8 +14,6 @@ inputs:
     description: "Steam password"
     required: true
     type: string
-  secrets:
-
 runs:
   using: "composite"
   steps:
