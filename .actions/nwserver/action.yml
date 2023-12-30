@@ -5,6 +5,7 @@ inputs:
     description: "Preview version"
     required: true
     type: boolean
+    default: false
   steam_username:
     description: "Steam username"
     required: true
@@ -19,9 +20,11 @@ runs:
     - uses: "actions/checkout@v3"
     - uses: actions/setup-dotnet@v4
     - name: Clone SteamRE/DepotDownloader
+      shell: bash
       run: |
         gh repo clone SteamRE/DepotDownloader
     - name: Install Dependencies
+      shell: bash
       run: |
         sudo apt install unzip pev
         wget -O /usr/local/bin/semver https://raw.githubusercontent.com/fsaintjacques/semver-tool/master/src/semver
@@ -30,4 +33,3 @@ runs:
         unzip -j nwn-nim.zip nwn_resman_pkg -d /usr/local/bin/
         chmod +x /usr/local/bin/nwn_resman_pkg
         echo /usr/local/bin/ >> $GITHUB_PATH
-
