@@ -3,20 +3,17 @@ on:
 jobs:
   build_push:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        channel: [release, preview]
     steps:
       - uses: actions/checkout@v4
-      - name: Download nwnee preview
+      - name: Download nwnee
         uses: ./.actions/nwserver/download/
         with:
-          preview: true
+          preview: ${{ matrix.channel == 'preview' }}
           steam_username: ${{ secrets.STEAM_USER }}
           steam_password: ${{ secrets.STEAM_PASS }}
-          output_path: ${{ github.workspace }}/preview
-      - name: Download nwnee preview
-        uses: ./.actions/nwserver/download/
-        with:
-          preview: false
-          steam_username: ${{ secrets.STEAM_USER }}
-          steam_password: ${{ secrets.STEAM_PASS }}
-          output_path: ${{ github.workspace }}/stable
+          output_path: ${{ github.workspace }}/${{ matrix.channel }}
+
 
