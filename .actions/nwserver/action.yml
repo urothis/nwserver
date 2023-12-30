@@ -14,6 +14,8 @@ inputs:
     description: "Steam password"
     required: true
     type: string
+  secrets:
+
 runs:
   using: "composite"
   steps:
@@ -21,7 +23,7 @@ runs:
     - name: Clone SteamRE/DepotDownloader
       shell: bash
       run: |
-        gh repo clone SteamRE/DepotDownloader
+        git clone SteamRE/DepotDownloader
     - name: Install Dependencies
       shell: bash
       run: |
