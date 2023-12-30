@@ -6,7 +6,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Download nwnee
-        uses: ./.actions/nwserver/
+        uses: ./.actions/nwserver/download/
         with:
           preview: true
           steam_username: ${{ secrets.STEAM_USER }}
