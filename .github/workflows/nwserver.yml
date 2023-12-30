@@ -11,9 +11,9 @@ jobs:
       - name: Download nwnee
         uses: ./.actions/nwserver/download/
         with:
-          preview: ${{ matrix.channel == 'preview' }}
+          preview:        ${{ matrix.channel == 'preview' }}
           steam_username: ${{ secrets.STEAM_USER }}
           steam_password: ${{ secrets.STEAM_PASS }}
-          output_path: ${{ github.workspace }}/${{ matrix.channel }}
+          output_path:    ${{ github.workspace }}
 
 
