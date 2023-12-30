@@ -21,7 +21,7 @@ runs:
     - name: Clone SteamRE/DepotDownloader
       shell: bash
       run: |
-        git clone SteamRE/DepotDownloader
+        git clone https://github.com/SteamRE/DepotDownloader.git
     - name: Install Dependencies
       shell: bash
       run: |
