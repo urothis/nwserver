@@ -29,7 +29,6 @@ runs:
       shell: bash
       env:
         APP_ID: 704450
-        BUILD_ID: 11253735
         WIN_BIN_DEPOT_ID: 704452
         LINUX_BIN_DEPOT_ID: 704454
         CONTENT_DEPOT_ID: 704451
@@ -37,7 +36,10 @@ runs:
       run: |
         mkdir -p ${{ inputs.output_path }}/nwserver/lang/en/data ${{ inputs.output_path }}/nwserver/data/bin/linux-amd64 ${{ inputs.output_path }}/nwserver/data/bin/linux-arm64 ${{ inputs.output_path }}/nwserver/data/data/mod/
         cd DepotDownloader/DepotDownloader
-        dotnet run -app 704450 -depot 704452 -username ${{ inputs.steam_username }} -password ${{ inputs.steam_password }}
-        dotnet run -app 704450 -depot 704454 -username ${{ inputs.steam_username }} -password ${{ inputs.steam_password }}
-        dotnet run -app 704450 -depot 704451 -username ${{ inputs.steam_username }} -password ${{ inputs.steam_password }}
-        ls -la depots/704451/
+        dotnet run -app 704450 -depot ${{ inputs.WIN_BIN_DEPOT_ID }} -username ${{ inputs.steam_username }} -password ${{ inputs.steam_password }}
+        dotnet run -app 704450 -depot ${{ inputs.LINUX_BIN_DEPOT_ID }} -username ${{ inputs.steam_username }} -password ${{ inputs.steam_password }}
+        dotnet run -app 704450 -depot ${{ inputs.CONTENT_DEPOT_ID }} -username ${{ inputs.steam_username }} -password ${{ inputs.steam_password }}
+        cd depots/${{ inputs.CONTENT_DEPOT_ID }}/*/
+        cp bin/linux-x86/nwserver-linux ${{ inputs.output_path }}/nwserver/docker_data/data/bin/linux-amd64/nwserver
+        cp bin/win32/nwserver.exe ${{ inputs.output_path }}/nwserver.exe
+        cp bin/linux-arm64/nwserver-linux ${{ inputs.output_path }}/nwserver/docker_data/data/bin/linux-arm64/nwserver

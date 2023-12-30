@@ -1,0 +1,29 @@
+name: "Parse nwserver"
+inputs:
+  path:
+    description: "Path to nwserver.exe"
+    required: true
+    type: string
+    default: "nwserver/nwserver.exe"
+outputs:
+  version: ${{ steps.nwn.outputs.version }}
+  major: ${{ steps.nwn.outputs.major }}
+  minor: ${{ steps.nwn.outputs.minor }}
+  patch: ${{ steps.nwn.outputs.patch }}
+runs:
+  using: "composite"
+  steps:
+    - name: Install Dependencies
+      shell: bash
+      run: |
+        sudo apt install unzip pev
+        wget -O /usr/local/bin/semver https://raw.githubusercontent.com/fsaintjacques/semver-tool/master/src/semver
+        chmod +x /usr/local/bin/semver
+    - name: Parse nwnee files
+      id: nwn
+      shell: bash
+      run: |
+        echo version=$(peres -v nwserver.exe -f csv | grep -v DEBUG | cut -d'.' -f2- | sed -n 2p) >> $GITHUB_OUTPUT
+        echo major=$(semver get major $(peres -v nwserver.exe -f csv | grep -v DEBUG | cut -d'.' -f2- | sed -n 2p)) >> $GITHUB_OUTPUT
+        echo minor=$(semver get minor $(peres -v nwserver.exe -f csv | grep -v DEBUG | cut -d'.' -f2- | sed -n 2p)) >> $GITHUB_OUTPUT
+        echo patch=$(semver get patch $(peres -v nwserver.exe -f csv | grep -v DEBUG | cut -d'.' -f2- | sed -n 2p)) >> $GITHUB_OUTPUT

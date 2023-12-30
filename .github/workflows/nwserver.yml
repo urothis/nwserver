@@ -9,11 +9,23 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Download nwnee
+        id: download
         uses: ./.actions/nwserver/download/
         with:
           preview:        ${{ matrix.channel == 'preview' }}
           steam_username: ${{ secrets.STEAM_USER }}
           steam_password: ${{ secrets.STEAM_PASS }}
           output_path:    ${{ github.workspace }}
-
-
+      - name: Parse nwnxee
+        id: parse
+        uses: ./.actions/nwserver/parse/
+        with:
+          input_path:     ${{ github.workspace }}/nwserver
+          output_path:    ${{ github.workspace }}/nwserver
+          channel:        ${{ matrix.channel }}
+      - name: Echo outputs
+        run: |
+          echo "version: ${{ steps.parse.outputs.version }}"
+          echo "major: ${{ steps.parse.outputs.major }}"
+          echo "minor: ${{ steps.parse.outputs.minor }}"
+          echo "patch: ${{ steps.parse.outputs.patch }}"
