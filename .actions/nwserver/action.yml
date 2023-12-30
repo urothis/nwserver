@@ -1,0 +1,33 @@
+name: "Process Nwserver"
+description: "Process Nwserver"
+inputs:
+  preview:
+    description: "Preview version"
+    required: true
+    type: boolean
+  steam_username:
+    description: "Steam username"
+    required: true
+    type: string
+  steam_password:
+    description: "Steam password"
+    required: true
+    type: string
+runs:
+  using: "composite"
+  steps:
+    - uses: "actions/checkout@v3"
+    - uses: actions/setup-dotnet@v4
+    - name: Clone SteamRE/DepotDownloader
+      run: |
+        gh repo clone SteamRE/DepotDownloader
+    - name: Install Dependencies
+      run: |
+        sudo apt install unzip pev
+        wget -O /usr/local/bin/semver https://raw.githubusercontent.com/fsaintjacques/semver-tool/master/src/semver
+        chmod +x /usr/local/bin/semver
+        wget -O nwn-nim.zip https://github.com/niv/neverwinter.nim/releases/download/1.7.1/neverwinter.linux.amd64.zip
+        unzip -j nwn-nim.zip nwn_resman_pkg -d /usr/local/bin/
+        chmod +x /usr/local/bin/nwn_resman_pkg
+        echo /usr/local/bin/ >> $GITHUB_PATH
+
