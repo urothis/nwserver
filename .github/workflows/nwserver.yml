@@ -9,5 +9,5 @@ jobs:
         uses: ./.actions/nwserver/
         with:
           preview: true
-          steam_user: ${{ secrets.STEAM_USER }}
+          steam_username: ${{ secrets.STEAM_USER }}
           steam_password: ${{ secrets.STEAM_PASS }}
