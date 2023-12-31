@@ -18,6 +18,8 @@ jobs:
       - name: Debug
         run: |
           ls -la docker/
+          ls -la docker/data/
+          ls -la docker/data/data
           echo ${{ steps.download.outputs.version }}
           echo ${{ steps.download.outputs.major }}
           echo ${{ steps.download.outputs.minor }}

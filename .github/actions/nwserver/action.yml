@@ -78,16 +78,33 @@ runs:
         echo major=$MAJOR >> $GITHUB_OUTPUT
         echo minor=$MINOR >> $GITHUB_OUTPUT
         echo patch=$PATCH >> $GITHUB_OUTPUT
-    - name: Package nwserver files
+    - name: Install Neverwinter.nim
       shell: bash
       run: |
-        cd ${{ github.workspace }}/DepotDownloader/DepotDownloader/depots/${{ inputs.nwn_win_bin_depot_id }}/*/bin/win32/
-        cp nwserver.exe ${{ github.workspace }}/docker/bin/win32/nwserver.exe
+        wget -O nwn-nim.zip https://github.com/niv/neverwinter.nim/releases/download/1.7.1/neverwinter.linux.amd64.zip
+        unzip -j nwn-nim.zip nwn_resman_pkg -d /usr/local/bin/
+        chmod +x /usr/local/bin/nwn_resman_pkg
+        echo /usr/local/bin/ >> $GITHUB_PATH
+    - name: Package nwserver files
+      shell: bash
+      env:
+        NWN_ROOT: ./
+      run: |
+        mkdir -p nwserver/docker/lang/en/data docker/data/bin/linux-amd64 docker/data/bin/linux-arm64 docker/data/data/mod/
+        nwn_resman_pkg --userdirectory . -d ${{ github.workspace }}/docker/data/data
 
+        cd DepotDownloader/DepotDownloader/depots/${{ inputs.nwn_win_bin_depot_id }}/*/bin/win32/
+        cp nwserver.exe ${{ github.workspace }}/docker/bin/win32/nwserver.exe
         cd ${{ github.workspace }}/DepotDownloader/DepotDownloader/depots/${{ inputs.nwn_linux_bin_depot_id }}/*/bin/linux-x86/
         cp nwserver ${{ github.workspace }}/docker/bin/linux-x86/nwserver
-
         cd ${{ github.workspace }}/DepotDownloader/DepotDownloader/depots/${{ inputs.nwn_linux_bin_depot_id }}/*/data/linux-arm64/
         cp nwserver ${{ github.workspace }}/docker/bin/linux-arm64/nwserver
 
+        cd ${{ github.workspace }}/DepotDownloader/DepotDownloader/depots/${{ inputs.nwn_content_depot_id }}/*/data/
+        cp cacert.pem ${{ github.workspace }}/docker/data/data/cacert.pem
 
+        cd ${{ github.workspace }}/DepotDownloader/DepotDownloader/depots/${{ inputs.nwn_content_depot_id }}/*/lang/en/data/
+        cp dialog.tlk ${{ github.workspace }}/docker/lang/en/data/dialog.tlk
+
+        cp -r scripts/. ${{ github.workspace }}/docker/
+        cp -r DockerDemo.mod ${{ github.workspace }}/docker/
