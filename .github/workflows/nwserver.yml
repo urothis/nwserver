@@ -15,7 +15,6 @@ jobs:
           preview: ${{ matrix.channel == 'preview' }}
           steam_username: ${{ secrets.STEAM_USER }}
           steam_password: ${{ secrets.STEAM_PASS }}
-          output_path: ${{ github.workspace }}
       #- name: Parse nwnee
       #  id: parse
       #  uses: ./.actions/nwserver/parse/

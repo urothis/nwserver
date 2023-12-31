@@ -13,11 +13,6 @@ inputs:
     description: "Steam password"
     required: true
     type: string
-  output_path:
-    description: "Output path"
-    required: true
-    default: ${{ github.workspace }}/nwserver
-    type: string
 runs:
   using: "composite"
   steps:
@@ -34,7 +29,7 @@ runs:
         LINUX_BIN_DEPOT_ID: 704454
         CONTENT_DEPOT_ID: 704451
       run: |
-        mkdir -p ${{ inputs.output_path }}/lang/en/data ${{ inputs.output_path }}/data/bin/linux-amd64 ${{ inputs.output_path }}/data/bin/linux-arm64 ${{ inputs.output_path }}/nwserver/data/data/mod/
+        mkdir -p nwserver/lang/en/data nwserver/data/bin/linux-amd64 nwserver/data/bin/linux-arm64 wserver/data/data/mod/
         cd DepotDownloader/DepotDownloader
         if [ "${{ inputs.preview }}" = "true" ]; then
           EXTRA_ARGS="-betapassword previewpreview -beta preview"
@@ -45,6 +40,5 @@ runs:
         dotnet run -app $APP_ID -depot $LINUX_BIN_DEPOT_ID -username ${{ inputs.steam_username }} -password ${{ inputs.steam_password }} $EXTRA_ARGS
         dotnet run -app $APP_ID -depot $CONTENT_DEPOT_ID -username ${{ inputs.steam_username }} -password ${{ inputs.steam_password }} $EXTRA_ARGS
 
-        echo "$PWD"
-        ls -la $PWD
-        ls -la ${{ inputs.output_path }}
+        cd ${{ github.workspace }}
+        ls -la .
