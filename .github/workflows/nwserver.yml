@@ -10,13 +10,14 @@ jobs:
       - uses: actions/checkout@v4
       - name: NWNEE
         id: download
-        uses: ./.actions/nwserver/
+        uses: ./.github/actions/nwserver/
         with:
           preview: ${{ matrix.channel == 'preview' }}
           steam_username: ${{ secrets.STEAM_USER }}
           steam_password: ${{ secrets.STEAM_PASS }}
       - name: Debug
         run: |
+          ls -la docker/
           echo ${{ steps.download.outputs.version }}
           echo ${{ steps.download.outputs.major }}
           echo ${{ steps.download.outputs.minor }}

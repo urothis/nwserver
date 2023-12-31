@@ -78,3 +78,16 @@ runs:
         echo major=$MAJOR >> $GITHUB_OUTPUT
         echo minor=$MINOR >> $GITHUB_OUTPUT
         echo patch=$PATCH >> $GITHUB_OUTPUT
+    - name: Package nwserver files
+      shell: bash
+      run: |
+        cd ${{ github.workspace }}/DepotDownloader/DepotDownloader/depots/${{ inputs.nwn_win_bin_depot_id }}/*/bin/win32/
+        cp nwserver.exe ${{ github.workspace }}/docker/bin/win32/nwserver.exe
+
+        cd ${{ github.workspace }}/DepotDownloader/DepotDownloader/depots/${{ inputs.nwn_linux_bin_depot_id }}/*/bin/linux-x86/
+        cp nwserver ${{ github.workspace }}/docker/bin/linux-x86/nwserver
+
+        cd ${{ github.workspace }}/DepotDownloader/DepotDownloader/depots/${{ inputs.nwn_linux_bin_depot_id }}/*/data/linux-arm64/
+        cp nwserver ${{ github.workspace }}/docker/bin/linux-arm64/nwserver
+
+
