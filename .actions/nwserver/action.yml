@@ -70,10 +70,10 @@ runs:
       id: nwn
       run: |
         cd ${{ github.workspace }}/DepotDownloader/DepotDownloader/depots/${{ inputs.nwn_win_bin_depot_id }}/*/bin/win32/
-        VERSION = $(peres -v nwserver.exe -f csv | grep -v DEBUG | cut -d'.' -f2- | sed -n 2p)
-        MAJOR = $(semver get major $VERSION)
-        MINOR = $(semver get minor $VERSION)
-        PATCH = $(semver get patch $VERSION)
+        VERSION=$(peres -v nwserver.exe -f csv | grep -v DEBUG | cut -d'.' -f2- | sed -n 2p)
+        MAJOR=$(semver get major $VERSION)
+        MINOR=$(semver get minor $VERSION)
+        PATCH=$(semver get patch $VERSION)
         echo version=$VERSION >> $GITHUB_OUTPUT
         echo major=$MAJOR >> $GITHUB_OUTPUT
         echo minor=$MINOR >> $GITHUB_OUTPUT
