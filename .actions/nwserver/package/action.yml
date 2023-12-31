@@ -28,6 +28,13 @@ runs:
         LINUX_BIN_DEPOT_ID: 704454
         CONTENT_DEPOT_ID: 704451
       run: |
+        ls -la $GITHUB_WORKSPACE
+        ls -la $GITHUB_WORKSPACE/nwserver
+        ls -la $GITHUB_WORKSPACE/DepotDownloader/DepotDownloader/depots
+        ls -la $GITHUB_WORKSPACE/DepotDownloader/DepotDownloader/depots/$LINUX_BIN_DEPOT_ID
+        ls -la $GITHUB_WORKSPACE/DepotDownloader/DepotDownloader/depots/$WIN_BIN_DEPOT_ID
+
+
         cd DepotDownloader/DepotDownloader/depots/$LINUX_BIN_DEPOT_ID/*/bin/linux-x86/
         cp nwserver-linux $GITHUB_WORKSPACE/packaged/data/bin/linux-amd64/nwserver
         cd $GITHUB_WORKSPACE
