@@ -1,11 +1,4 @@
 name: "Parse nwserver"
-inputs:
-  path:
-    description: "Path"
-    required: true
-    default: ${{ github.workspace }}/nwserver
-    type: string
-
 runs:
   using: "composite"
   steps:
@@ -29,31 +22,31 @@ runs:
         LINUX_BIN_DEPOT_ID: 704454
         CONTENT_DEPOT_ID: 704451
       run: |
-        ls -la $GITHUB_WORKSPACE
+        ls -la ${{ github.workspace }}
         ls -la
 
-        cd DepotDownloader/DepotDownloader/depots/$LINUX_BIN_DEPOT_ID/*/bin/linux-x86/
-        cp nwserver-linux $GITHUB_WORKSPACE/packaged/data/bin/linux-amd64/nwserver
-        cd $GITHUB_WORKSPACE
+        cd ${{ github.workspace }}/DepotDownloader/DepotDownloader/depots/$LINUX_BIN_DEPOT_ID/*/bin/linux-x86/
+        cp nwserver-linux ${{ github.workspace }}/packaged/data/bin/linux-amd64/nwserver
+        cd ${{ github.workspace }}
 
-        cd DepotDownloader/DepotDownloader/depots/$WIN_BIN_DEPOT_ID/*/bin/win32/
-        cp nwserver.exe $GITHUB_WORKSPACE/packaged/nwserver.exe
-        cd $GITHUB_WORKSPACE
+        cd ${{ github.workspace }}/DepotDownloader/DepotDownloader/depots/$WIN_BIN_DEPOT_ID/*/bin/win32/
+        cp nwserver.exe ${{ github.workspace }}/packaged/nwserver.exe
+        cd ${{ github.workspace }}
 
-        cd DepotDownloader/DepotDownloader/depots/$LINUX_BIN_DEPOT_ID/*/bin/linux-arm64/
-        cp nwserver-linux $GITHUB_WORKSPACE/packaged/data/bin/linux-arm64/nwserver
-        cd $GITHUB_WORKSPACE
+        cd ${{ github.workspace }}/DepotDownloader/DepotDownloader/depots/$LINUX_BIN_DEPOT_ID/*/bin/linux-arm64/
+        cp nwserver-linux ${{ github.workspace }}/packaged/data/bin/linux-arm64/nwserver
+        cd ${{ github.workspace }}
 
-        cd DepotDownloader/DepotDownloader/depots/$CONTENT_DEPOT_ID/*/data/
-        cp cacert.pem $GITHUB_WORKSPACE/packaged/data/data/cacert.pem
-        cd $GITHUB_WORKSPACE
+        cd ${{ github.workspace }}/DepotDownloader/DepotDownloader/depots/$CONTENT_DEPOT_ID/*/data/
+        cp cacert.pem ${{ github.workspace }}/packaged/data/data/cacert.pem
+        cd ${{ github.workspace }}
 
-        cd DepotDownloader/DepotDownloader/depots/$CONTENT_DEPOT_ID/*/data/
-        cp dialog.tlk $GITHUB_WORKSPACE/packaged/data/data/dialog.tlk
-        cd $GITHUB_WORKSPACE
+        cd ${{ github.workspace }}/DepotDownloader/DepotDownloader/depots/$CONTENT_DEPOT_ID/*/data/
+        cp dialog.tlk ${{ github.workspace }}/packaged/data/data/dialog.tlk
+        cd ${{ github.workspace }}
 
-        cp -r scripts/. $GITHUB_WORKSPACE/packaged/
-        cp -r DockerDemo.mod $GITHUB_WORKSPACE/packaged/
+        cp -r scripts/. ${{ github.workspace }}/packaged/
+        cp -r DockerDemo.mod ${{ github.workspace }}/packaged/
 
         cd depots/$CONTENT_DEPOT_ID/*/
-        nwn_resman_pkg --userdirectory . -d $GITHUB_WORKSPACE/packaged/data/data
+        nwn_resman_pkg --userdirectory . -d ${{ github.workspace }}/packaged/data/data
