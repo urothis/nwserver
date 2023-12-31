@@ -1,10 +1,4 @@
 name: "Parse nwserver"
-inputs:
-  path:
-    description: "Path to nwserver.exe"
-    required: true
-    type: string
-    default: ${{ github.workspace }}/data/bin/win32/nwserver.exe
 outputs:
   version:
     description: "Version"
@@ -30,8 +24,11 @@ runs:
     - name: Parse nwnee files
       id: nwn
       shell: bash
+      env:
+        WIN_BIN_DEPOT_ID: 704452
       run: |
-        echo version=$(peres -v ${{ inputs.path }} -f csv | grep -v DEBUG | cut -d'.' -f2- | sed -n 2p) >> $GITHUB_OUTPUT
-        echo major=$(semver get major $(peres -v ${{ inputs.path }} -f csv | grep -v DEBUG | cut -d'.' -f2- | sed -n 2p)) >> $GITHUB_OUTPUT
-        echo minor=$(semver get minor $(peres -v ${{ inputs.path }} -f csv | grep -v DEBUG | cut -d'.' -f2- | sed -n 2p)) >> $GITHUB_OUTPUT
-        echo patch=$(semver get patch $(peres -v ${{ inputs.path }} -f csv | grep -v DEBUG | cut -d'.' -f2- | sed -n 2p)) >> $GITHUB_OUTPUT
+        cd ${{ github.workspace }}/DepotDownloader/DepotDownloader/depots/$WIN_BIN_DEPOT_ID/*/bin/win32/
+        echo version=$(peres -v nwserver.exe -f csv | grep -v DEBUG | cut -d'.' -f2- | sed -n 2p) >> $GITHUB_OUTPUT
+        echo major=$(semver get major $(peres -v nwserver.exe -f csv | grep -v DEBUG | cut -d'.' -f2- | sed -n 2p)) >> $GITHUB_OUTPUT
+        echo minor=$(semver get minor $(peres -v nwserver.exe -f csv | grep -v DEBUG | cut -d'.' -f2- | sed -n 2p)) >> $GITHUB_OUTPUT
+        echo patch=$(semver get patch $(peres -v nwserver.exe -f csv | grep -v DEBUG | cut -d'.' -f2- | sed -n 2p)) >> $GITHUB_OUTPUT
