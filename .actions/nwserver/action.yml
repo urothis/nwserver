@@ -67,9 +67,14 @@ runs:
         chmod +x /usr/local/bin/semver
     - name: Parse nwnee files
       shell: bash
+      id: nwn
       run: |
         cd ${{ github.workspace }}/DepotDownloader/DepotDownloader/depots/${{ inputs.nwn_win_bin_depot_id }}/*/bin/win32/
-        echo version=$(peres -v nwserver.exe -f csv | grep -v DEBUG | cut -d'.' -f2- | sed -n 2p) >> $GITHUB_OUTPUT
-        echo major=$(semver get major $(peres -v nwserver.exe -f csv | grep -v DEBUG | cut -d'.' -f2- | sed -n 2p)) >> $GITHUB_OUTPUT
-        echo minor=$(semver get minor $(peres -v nwserver.exe -f csv | grep -v DEBUG | cut -d'.' -f2- | sed -n 2p)) >> $GITHUB_OUTPUT
-        echo patch=$(semver get patch $(peres -v nwserver.exe -f csv | grep -v DEBUG | cut -d'.' -f2- | sed -n 2p)) >> $GITHUB_OUTPUT
+        VERSION = $(peres -v nwserver.exe -f csv | grep -v DEBUG | cut -d'.' -f2- | sed -n 2p)
+        MAJOR = $(semver get major $VERSION)
+        MINOR = $(semver get minor $VERSION)
+        PATCH = $(semver get patch $VERSION)
+        echo version=$VERSION >> $GITHUB_OUTPUT
+        echo major=$MAJOR >> $GITHUB_OUTPUT
+        echo minor=$MINOR >> $GITHUB_OUTPUT
+        echo patch=$PATCH >> $GITHUB_OUTPUT
