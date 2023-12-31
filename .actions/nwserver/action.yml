@@ -1,0 +1,82 @@
+name: "Download nwserver"
+inputs:
+  preview:
+    description: "Preview version"
+    required: true
+    type: boolean
+    default: false
+  steam_username:
+    description: "Steam username"
+    required: true
+    type: string
+  steam_password:
+    description: "Steam password"
+    required: true
+    type: string
+  nwn_app_id:
+    description: "NWN App ID"
+    required: true
+    type: string
+    default: 704450
+  nwn_win_bin_depot_id:
+    description: "NWN Win Bin Depot ID"
+    required: true
+    type: string
+    default: 704452
+  nwn_linux_bin_depot_id:
+    description: "NWN Linux Bin Depot ID"
+    required: true
+    type: string
+    default: 704454
+  nwn_content_depot_id:
+    description: "NWN Content Depot ID"
+    required: true
+    type: string
+    default: 704451
+outputs:
+  version:
+    description: "Version"
+    value: ${{ steps.nwn.outputs.version }}
+  major:
+    description: "Major version"
+    value: ${{ steps.nwn.outputs.major }}
+  minor:
+    description: "Minor version"
+    value: ${{ steps.nwn.outputs.minor }}
+  patch:
+    description: "Patch version"
+    value: ${{ steps.nwn.outputs.patch }}
+runs:
+  using: "composite"
+  steps:
+    - uses: "actions/checkout@v3"
+    - name: Clone SteamRE/DepotDownloader
+      shell: bash
+      run: |
+        git clone https://github.com/SteamRE/DepotDownloader.git
+    - name: Download nwnee files
+      shell: bash
+      run: |
+        cd DepotDownloader/DepotDownloader
+        if [ "${{ inputs.preview }}" = "true" ]; then
+          EXTRA_ARGS="-betapassword previewpreview -beta preview"
+        else
+          EXTRA_ARGS=""
+        fi
+        dotnet run -app ${{ inputs.nwn_app_id }} -depot $${{ inputs.nwn_win_bin_depot_id }} -username ${{ inputs.steam_username }} -password ${{ inputs.steam_password }} $EXTRA_ARGS
+        dotnet run -app ${{ inputs.nwn_app_id }} -depot $${{ inputs.nwn_linux_bin_depot_id }} -username ${{ inputs.steam_username }} -password ${{ inputs.steam_password }} $EXTRA_ARGS
+        dotnet run -app ${{ inputs.nwn_app_id }} -depot ${{ inputs.nwn_content_depot_id }} -username ${{ inputs.steam_username }} -password ${{ inputs.steam_password }} $EXTRA_ARGS
+    - name: Install semver
+      shell: bash
+      run: |
+        sudo apt install unzip pev
+        wget -O /usr/local/bin/semver https://raw.githubusercontent.com/fsaintjacques/semver-tool/master/src/semver
+        chmod +x /usr/local/bin/semver
+    - name: Parse nwnee files
+      shell: bash
+      run: |
+        cd ${{ github.workspace }}/DepotDownloader/DepotDownloader/depots/$WIN_BIN_DEPOT_ID/*/bin/win32/
+        echo version=$(peres -v nwserver.exe -f csv | grep -v DEBUG | cut -d'.' -f2- | sed -n 2p) >> $GITHUB_OUTPUT
+        echo major=$(semver get major $(peres -v nwserver.exe -f csv | grep -v DEBUG | cut -d'.' -f2- | sed -n 2p)) >> $GITHUB_OUTPUT
+        echo minor=$(semver get minor $(peres -v nwserver.exe -f csv | grep -v DEBUG | cut -d'.' -f2- | sed -n 2p)) >> $GITHUB_OUTPUT
+        echo patch=$(semver get patch $(peres -v nwserver.exe -f csv | grep -v DEBUG | cut -d'.' -f2- | sed -n 2p)) >> $GITHUB_OUTPUT

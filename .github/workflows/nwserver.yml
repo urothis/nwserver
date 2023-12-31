@@ -10,11 +10,18 @@ jobs:
       - uses: actions/checkout@v4
       - name: NWNEE
         id: download
-        uses: ./.actions/nwserver/download/
+        uses: ./.actions/nwserver/
         with:
           preview: ${{ matrix.channel == 'preview' }}
           steam_username: ${{ secrets.STEAM_USER }}
           steam_password: ${{ secrets.STEAM_PASS }}
+      - name: Debug
+        run: |
+          echo ${{ steps.download.outputs.version }}
+          echo ${{ steps.download.outputs.major }}
+          echo ${{ steps.download.outputs.minor }}
+          echo ${{ steps.download.outputs.patch }}
+
       #- name: Parse nwnee
       #  id: parse
       #  uses: ./.actions/nwserver/parse/
