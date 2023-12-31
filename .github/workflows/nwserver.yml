@@ -8,7 +8,7 @@ jobs:
         channel: [preview, release]
     steps:
       - uses: actions/checkout@v4
-      - name: Download nwnee
+      - name: NWNEE
         id: download
         uses: ./.actions/nwserver/download/
         with:
@@ -16,10 +16,10 @@ jobs:
           steam_username: ${{ secrets.STEAM_USER }}
           steam_password: ${{ secrets.STEAM_PASS }}
           output_path: ${{ github.workspace }}
-      - name: Parse nwnee
-        id: parse
-        uses: ./.actions/nwserver/parse/
-      - name: Package nwnee
-        id: package
-        uses: ./.actions/nwserver/package/
+      #- name: Parse nwnee
+      #  id: parse
+      #  uses: ./.actions/nwserver/parse/
+      #- name: Package nwnee
+      #  id: package
+      #  uses: ./.actions/nwserver/package/
 
