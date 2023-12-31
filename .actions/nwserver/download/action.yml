@@ -45,3 +45,5 @@ runs:
         dotnet run -app $APP_ID -depot $LINUX_BIN_DEPOT_ID -username ${{ inputs.steam_username }} -password ${{ inputs.steam_password }} $EXTRA_ARGS
         dotnet run -app $APP_ID -depot $CONTENT_DEPOT_ID -username ${{ inputs.steam_username }} -password ${{ inputs.steam_password }} $EXTRA_ARGS
 
+        echo "$PWD"
+        ls -la ${{ inputs.output_path }}
