@@ -4,7 +4,7 @@ inputs:
     description: "Path to nwserver.exe"
     required: true
     type: string
-    default: ${{ github.workspace }}/nwserver/data/bin/win32/nwserver.exe
+    default: ${{ github.workspace }}/data/bin/win32/nwserver.exe
 outputs:
   version:
     description: "Version"
