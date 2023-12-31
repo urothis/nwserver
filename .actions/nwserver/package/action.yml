@@ -18,6 +18,7 @@ runs:
         unzip -j nwn-nim.zip nwn_resman_pkg -d /usr/local/bin/
         chmod +x /usr/local/bin/nwn_resman_pkg
         echo /usr/local/bin/ >> $GITHUB_PATH
+        rm nwn-nim.zip
     - name: Package nwnee files
       shell: bash
       env:
@@ -29,11 +30,7 @@ runs:
         CONTENT_DEPOT_ID: 704451
       run: |
         ls -la $GITHUB_WORKSPACE
-        ls -la $GITHUB_WORKSPACE/nwserver
-        ls -la $GITHUB_WORKSPACE/DepotDownloader/DepotDownloader/depots
-        ls -la $GITHUB_WORKSPACE/DepotDownloader/DepotDownloader/depots/$LINUX_BIN_DEPOT_ID
-        ls -la $GITHUB_WORKSPACE/DepotDownloader/DepotDownloader/depots/$WIN_BIN_DEPOT_ID
-
+        ls -la
 
         cd DepotDownloader/DepotDownloader/depots/$LINUX_BIN_DEPOT_ID/*/bin/linux-x86/
         cp nwserver-linux $GITHUB_WORKSPACE/packaged/data/bin/linux-amd64/nwserver
