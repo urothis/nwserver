@@ -6,10 +6,18 @@ inputs:
     type: string
     default: ${{ github.workspace }}/nwserver/data/bin/win32/nwserver.exe
 outputs:
-  version: ${{ steps.nwn.outputs.version }}
-  major: ${{ steps.nwn.outputs.major }}
-  minor: ${{ steps.nwn.outputs.minor }}
-  patch: ${{ steps.nwn.outputs.patch }}
+  version:
+    description: "Version"
+    value: ${{ steps.nwn.outputs.version }}
+  major:
+    description: "Major version"
+    value: ${{ steps.nwn.outputs.major }}
+  minor:
+    description: "Minor version"
+    value: ${{ steps.nwn.outputs.minor }}
+  patch:
+    description: "Patch version"
+    value: ${{ steps.nwn.outputs.patch }}
 runs:
   using: "composite"
   steps:
