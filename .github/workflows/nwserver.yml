@@ -16,10 +16,10 @@ jobs:
           steam_username: ${{ secrets.STEAM_USER }}
           steam_password: ${{ secrets.STEAM_PASS }}
           output_path: ${{ github.workspace }}
-      - name: Parse nwnxee
+      - name: Parse nwnee
         id: parse
         uses: ./.actions/nwserver/parse/
-      - name: Package nwnxee
+      - name: Package nwnee
         id: package
         uses: ./.actions/nwserver/package/
 

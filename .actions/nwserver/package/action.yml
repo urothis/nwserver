@@ -22,9 +22,7 @@ runs:
         LINUX_BIN_DEPOT_ID: 704454
         CONTENT_DEPOT_ID: 704451
       run: |
-        echo "APP_ID: $APP_ID"
         ls -la ${{ github.workspace }}
-        echo "BUILD_ID: $BUILD_ID"
         ls -la ${{ github.workspace }}/DepotDownloader/DepotDownloader/depots/
 
         cd ${{ github.workspace }}/DepotDownloader/DepotDownloader/depots/$LINUX_BIN_DEPOT_ID/*/bin/linux-x86/

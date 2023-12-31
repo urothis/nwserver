@@ -27,6 +27,9 @@ runs:
       env:
         WIN_BIN_DEPOT_ID: 704452
       run: |
+        ls -la ${{ github.workspace }}
+        ls -la ${{ github.workspace }}/DepotDownloader/DepotDownloader/depots/
+
         cd ${{ github.workspace }}/DepotDownloader/DepotDownloader/depots/$WIN_BIN_DEPOT_ID/*/bin/win32/
         echo version=$(peres -v nwserver.exe -f csv | grep -v DEBUG | cut -d'.' -f2- | sed -n 2p) >> $GITHUB_OUTPUT
         echo major=$(semver get major $(peres -v nwserver.exe -f csv | grep -v DEBUG | cut -d'.' -f2- | sed -n 2p)) >> $GITHUB_OUTPUT
