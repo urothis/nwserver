@@ -5,8 +5,7 @@ inputs:
     required: true
     default: ${{ github.workspace }}/nwserver
     type: string
-env:
-  NWN_ROOT: ${{ inputs.path }}
+
 runs:
   using: "composite"
   steps:
@@ -22,6 +21,7 @@ runs:
     - name: Package nwnee files
       shell: bash
       env:
+          NWN_ROOT: ${{ inputs.path }}
           CONTENT_DEPOT_ID: 704451
       run: |
         cd depots/$CONTENT_DEPOT_ID/*/
