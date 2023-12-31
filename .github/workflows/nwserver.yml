@@ -12,17 +12,13 @@ jobs:
         id: download
         uses: ./.actions/nwserver/download/
         with:
-          preview:        ${{ matrix.channel == 'preview' }}
+          preview: ${{ matrix.channel == 'preview' }}
           steam_username: ${{ secrets.STEAM_USER }}
           steam_password: ${{ secrets.STEAM_PASS }}
-          output_path:    ${{ github.workspace }}
+          output_path: ${{ github.workspace }}
       - name: Parse nwnxee
         id: parse
         uses: ./.actions/nwserver/parse/
-        with:
-          input_path:     ${{ github.workspace }}/nwserver
-          output_path:    ${{ github.workspace }}/nwserver
-          channel:        ${{ matrix.channel }}
       - name: Echo outputs
         run: |
           echo "version: ${{ steps.parse.outputs.version }}"
@@ -32,5 +28,4 @@ jobs:
       - name: Package nwserver files
         id: package
         uses: ./.actions/nwserver/package/
-        with:
-          input_path:     ${{ github.workspace }}/nwserver
+      - run: ls -la ${{ steps.package }}

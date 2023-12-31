@@ -44,8 +44,4 @@ runs:
         dotnet run -app $APP_ID -depot $WIN_BIN_DEPOT_ID -username ${{ inputs.steam_username }} -password ${{ inputs.steam_password }} $EXTRA_ARGS
         dotnet run -app $APP_ID -depot $LINUX_BIN_DEPOT_ID -username ${{ inputs.steam_username }} -password ${{ inputs.steam_password }} $EXTRA_ARGS
         dotnet run -app $APP_ID -depot $CONTENT_DEPOT_ID -username ${{ inputs.steam_username }} -password ${{ inputs.steam_password }} $EXTRA_ARGS
-        cd depots/$CONTENT_DEPOT_ID/*/
-        ls -la
-        cp bin/linux-x86/nwserver-linux ${{ inputs.output_path }}/data/bin/linux-amd64/nwserver
-        cp bin/win32/nwserver.exe ${{ inputs.output_path }}/data/bin/win32/nwserver.exe
-        cp bin/linux-arm64/nwserver-linux ${{ inputs.output_path }}/data/bin/linux-arm64/nwserver
+

@@ -25,4 +25,4 @@ runs:
           CONTENT_DEPOT_ID: 704451
       run: |
         cd depots/$CONTENT_DEPOT_ID/*/
-        nwn_resman_pkg --userdirectory . -d ${{ inputs.GITHUB_WORKSPACE }}/data/data
+        nwn_resman_pkg --userdirectory . -d ${{ inputs.path }}/data/data
