@@ -46,4 +46,5 @@ runs:
         dotnet run -app $APP_ID -depot $CONTENT_DEPOT_ID -username ${{ inputs.steam_username }} -password ${{ inputs.steam_password }} $EXTRA_ARGS
 
         echo "$PWD"
+        ls -la $PWD
         ls -la ${{ inputs.output_path }}
