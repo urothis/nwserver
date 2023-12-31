@@ -19,4 +19,7 @@ jobs:
       - name: Parse nwnxee
         id: parse
         uses: ./.actions/nwserver/parse/
+      - name: Package nwnxee
+        id: package
+        uses: ./.actions/nwserver/package/
 
