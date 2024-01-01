@@ -9,7 +9,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: NWNEE
-        id: download
+        id: nwn
         uses: ./.github/actions/nwserver/
         with:
           preview: ${{ matrix.channel == 'preview' }}
@@ -18,10 +18,10 @@ jobs:
       - name: Debug
         run: |
           ls -R docker/
-          echo ${{ steps.download.outputs.version }}
-          echo ${{ steps.download.outputs.major }}
-          echo ${{ steps.download.outputs.minor }}
-          echo ${{ steps.download.outputs.patch }}
+          echo ${{ steps.nwn.outputs.version }}
+          echo ${{ steps.nwn.outputs.major }}
+          echo ${{ steps.nwn.outputs.minor }}
+          echo ${{ steps.nwn.outputs.patch }}
       - name: Bookworm docker image
         uses: docker/build-push-action@v3
         with:
