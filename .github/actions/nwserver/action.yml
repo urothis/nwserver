@@ -87,32 +87,18 @@ runs:
         echo /usr/local/bin/ >> $GITHUB_PATH
     - name: Package nwserver files
       shell: bash
+      working-directory: DepotDownloader/DepotDownloader/depots/${{ inputs.nwn_content_depot_id }}/*/
       env:
         NWN_ROOT: ./
       run: |
-        mkdir -p nwserver/docker/lang/en/data docker/data/bin/linux-amd64 docker/data/bin/linux-arm64 docker/data/data/mod/
-        cd DepotDownloader/DepotDownloader/depots/${{ inputs.nwn_content_depot_id }}/*/
+        mkdir -p ${{ github.workspace }}/docker/data/data
         nwn_resman_pkg --userdirectory . -d ${{ github.workspace }}/docker/data/data
     - name: Assemble other nwserver files
       shell: bash
       run: |
-        ls -al DepotDownloader/DepotDownloader/depots/${{ inputs.nwn_win_bin_depot_id }}/*/bin
-
-        ls DepotDownloader/DepotDownloader/depots/${{ inputs.nwn_win_bin_depot_id }}/*/bin/win32/
-        cd DepotDownloader/DepotDownloader/depots/${{ inputs.nwn_win_bin_depot_id }}/*/bin/win32/
-        cp nwserver.exe ${{ github.workspace }}/docker/bin/win32/nwserver.exe
-
-        ls DepotDownloader/DepotDownloader/depots/${{ inputs.nwn_linux_bin_depot_id }}/*/
-        cd ${{ github.workspace }}/DepotDownloader/DepotDownloader/depots/${{ inputs.nwn_linux_bin_depot_id }}/*/bin/linux-x86/
-        cp nwserver ${{ github.workspace }}/docker/bin/linux-x86/nwserver
-        cd ${{ github.workspace }}/DepotDownloader/DepotDownloader/depots/${{ inputs.nwn_linux_bin_depot_id }}/*/bin/linux-arm64/
-        cp nwserver ${{ github.workspace }}/docker/bin/linux-arm64/nwserver
-
-        ls DepotDownloader/DepotDownloader/depots/${{ inputs.nwn_content_depot_id }}/*/
-        cd ${{ github.workspace }}/DepotDownloader/DepotDownloader/depots/${{ inputs.nwn_content_depot_id }}/*/data/
-        cp cacert.pem ${{ github.workspace }}/docker/data/data/cacert.pem
-        cd ${{ github.workspace }}/DepotDownloader/DepotDownloader/depots/${{ inputs.nwn_content_depot_id }}/*/data/lang/en/data/
-        cp dialog.tlk ${{ github.workspace }}/docker/lang/en/data/dialog.tlk
-
-        cp -r scripts/. ${{ github.workspace }}/docker/
-        cp -r DockerDemo.mod ${{ github.workspace }}/docker/
+        mkdir -p docker/data/data/mod docker/data/bin/win32/ docker/data/bin/linux-x86 docker/data/bin/linux-arm64 docker/lang/en/data
+        cp DepotDownloader/DepotDownloader/depots/${{ inputs.nwn_win_bin_depot_id }}/*/bin/win32/nwserver.exe docker/data/bin/win32/
+        cp DepotDownloader/DepotDownloader/depots/${{ inputs.nwn_linux_bin_depot_id }}/*/bin/linux-x86/nwserver docker/data/bin/linux-x86/
+        cp DepotDownloader/DepotDownloader/depots/${{ inputs.nwn_linux_bin_depot_id }}/*/bin/linux-arm64/nwserver docker/data/bin/linux-arm64/
+        cp DepotDownloader/DepotDownloader/depots/${{ inputs.nwn_content_depot_id }}/*/data/cacert.pem docker/data/data/
+        cp DepotDownloader/DepotDownloader/depots/${{ inputs.nwn_content_depot_id }}/*/data/lang/en/data/dialog.tlk docker/lang/en/data/
