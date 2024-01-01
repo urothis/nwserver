@@ -5,7 +5,7 @@ LABEL maintainer "urothis@gmail.com"
 ARG TARGETOS TARGETARCH NWN_IMAGE_BUILD_DATE NWN_VERSION
 COPY docker/data/bin/${TARGETOS}-${TARGETARCH}/nwserver /nwn/data/bin/${TARGETOS}-${TARGETARCH}/nwserver
 COPY docker/data/data /nwn/data/data
-COPY docker/data/lang/ /nwn/data/lang/
+COPY docker/data/lang /nwn/data/lang
 
 COPY scripts/run-server.sh /nwn/run-server.sh
 COPY scripts/prep-nwn-ini.awk /nwn/prep-nwn-ini.awk
