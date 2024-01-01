@@ -116,6 +116,7 @@ runs:
       uses: docker/build-push-action@v3
       with:
         file: Dockerfile
+        context: .
         platforms: |
           linux/amd64
           linux/arm64
@@ -140,6 +141,7 @@ runs:
       uses: docker/build-push-action@v3
       with:
         file: Dockerfile
+        context: .
         platforms: |
           linux/amd64
           linux/arm64
@@ -163,8 +165,8 @@ runs:
     - name: Buster docker image
       uses: docker/build-push-action@v3
       with:
-        context: docker
         file: Dockerfile
+        context: .
         platforms: |
           linux/amd64
           linux/arm64
