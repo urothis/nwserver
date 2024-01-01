@@ -8,6 +8,15 @@ jobs:
         channel: [preview, release]
     steps:
       - uses: actions/checkout@v4
+      - name: Set up QEMU
+        id: qemu
+        uses: docker/setup-qemu-action@v2
+        with:
+          platforms: |
+            arm64
+      - name: Set up Docker Buildx
+        id: buildx
+        uses: docker/setup-buildx-action@v2
       - name: NWNEE
         id: nwn
         uses: ./.github/actions/nwserver/
