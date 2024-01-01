@@ -97,6 +97,13 @@ runs:
       shell: bash
       run: |
         ls -al .
+        ls -al DepotDownloader/
+        ls -al DepotDownloader/DepotDownloader/
+        ls -al DepotDownloader/DepotDownloader/depots/
+        ls -al DepotDownloader/DepotDownloader/depots/${{ inputs.nwn_win_bin_depot_id }}/
+        ls -al DepotDownloader/DepotDownloader/depots/${{ inputs.nwn_win_bin_depot_id }}/*/
+        ls -al DepotDownloader/DepotDownloader/depots/${{ inputs.nwn_win_bin_depot_id }}/*/data
+
         ls DepotDownloader/DepotDownloader/depots/${{ inputs.nwn_win_bin_depot_id }}/*/
         cd DepotDownloader/DepotDownloader/depots/${{ inputs.nwn_win_bin_depot_id }}/*/data/bin/win32/
         cp nwserver.exe ${{ github.workspace }}/docker/bin/win32/nwserver.exe
