@@ -87,10 +87,11 @@ runs:
         echo /usr/local/bin/ >> $GITHUB_PATH
     - name: Package nwserver files
       shell: bash
-      working-directory: DepotDownloader/DepotDownloader/depots/${{ inputs.nwn_content_depot_id }}/*/
+      working-directory: DepotDownloader/DepotDownloader/depots/
       env:
         NWN_ROOT: ./
       run: |
+        cd ${{ inputs.nwn_content_depot_id }}/*/
         mkdir -p ${{ github.workspace }}/docker/data/data
         nwn_resman_pkg --userdirectory . -d ${{ github.workspace }}/docker/data/data
     - name: Assemble other nwserver files
