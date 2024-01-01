@@ -98,7 +98,7 @@ runs:
       run: |
         ls -al DepotDownloader/DepotDownloader/depots/${{ inputs.nwn_win_bin_depot_id }}/*/bin
 
-        ls DepotDownloader/DepotDownloader/depots/${{ inputs.nwn_win_bin_depot_id }}/*/
+        ls DepotDownloader/DepotDownloader/depots/${{ inputs.nwn_win_bin_depot_id }}/*/bin/win32/
         cd DepotDownloader/DepotDownloader/depots/${{ inputs.nwn_win_bin_depot_id }}/*/bin/win32/
         cp nwserver.exe ${{ github.workspace }}/docker/bin/win32/nwserver.exe
 
