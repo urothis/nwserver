@@ -91,10 +91,12 @@ runs:
         NWN_ROOT: ./
       run: |
         mkdir -p nwserver/docker/lang/en/data docker/data/bin/linux-amd64 docker/data/bin/linux-arm64 docker/data/data/mod/
-
         cd DepotDownloader/DepotDownloader/depots/${{ inputs.nwn_content_depot_id }}/*/
         nwn_resman_pkg --userdirectory . -d ${{ github.workspace }}/docker/data/data
-
+    - name: Assemble other nwserver files
+      shell: bash
+      run: |
+        ls -al .
         ls DepotDownloader/DepotDownloader/depots/${{ inputs.nwn_win_bin_depot_id }}/*/
         cd DepotDownloader/DepotDownloader/depots/${{ inputs.nwn_win_bin_depot_id }}/*/data/bin/win32/
         cp nwserver.exe ${{ github.workspace }}/docker/bin/win32/nwserver.exe
