@@ -24,13 +24,6 @@ jobs:
           preview: ${{ matrix.channel == 'preview' }}
           steam_username: ${{ secrets.STEAM_USER }}
           steam_password: ${{ secrets.STEAM_PASS }}
-      - name: Debug
-        run: |
-          ls -R docker/
-          echo ${{ steps.nwn.outputs.version }}
-          echo ${{ steps.nwn.outputs.major }}
-          echo ${{ steps.nwn.outputs.minor }}
-          echo ${{ steps.nwn.outputs.patch }}
       - name: Bookworm docker image
         uses: docker/build-push-action@v3
         with:
@@ -59,7 +52,6 @@ jobs:
       - name: Bullseye docker image
         uses: docker/build-push-action@v3
         with:
-          context: docker
           file: Dockerfile
           platforms: |
             linux/amd64

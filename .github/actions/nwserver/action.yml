@@ -103,4 +103,3 @@ runs:
         cp DepotDownloader/DepotDownloader/depots/${{ inputs.nwn_linux_bin_depot_id }}/*/bin/linux-arm64/nwserver-linux docker/data/bin/linux-arm64/nwserver
         cp DepotDownloader/DepotDownloader/depots/${{ inputs.nwn_content_depot_id }}/*/data/cacert.pem docker/data/data/
         cp DepotDownloader/DepotDownloader/depots/${{ inputs.nwn_content_depot_id }}/*/lang/en/data/dialog.tlk docker/data/lang/en/data/
-        cp DockerDemo.mod docker/data/data/mod/
