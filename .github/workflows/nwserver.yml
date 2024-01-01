@@ -27,7 +27,6 @@ jobs:
       - name: Bookworm docker image
         uses: docker/build-push-action@v3
         with:
-          context: docker
           file: Dockerfile
           platforms: |
             linux/amd64
@@ -104,11 +103,3 @@ jobs:
             ghcr.io/${{ github.repository }}:${{ steps.nwn.outputs.version }}-buster
             ghcr.io/${{ github.repository }}:${{ steps.nwn.outputs.major }}.${{ steps.nwn.outputs.minor }}-buster
             ghcr.io/${{ github.repository }}:${{ steps.nwn.outputs.major }}-buster
-
-      #- name: Parse nwnee
-      #  id: parse
-      #  uses: ./.actions/nwserver/parse/
-      #- name: Package nwnee
-      #  id: package
-      #  uses: ./.actions/nwserver/package/
-
