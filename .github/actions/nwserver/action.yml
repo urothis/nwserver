@@ -138,10 +138,10 @@ runs:
           com.nwn.version=${{ steps.nwn.outputs.version }}
           com.nwn.description="docker image for running a Neverwinter Nights 1 server on Linux"
         tags: |
-          urothis/nwserver:${{ input.channel }}
-          ghcr.io/${{ github.repository }}:${{ input.channel }}:
-          urothis/nwserver:${{ input.channel }}-bookworm
-          ghcr.io/${{ github.repository }}:${{ input.channel }}-bookworm
+          urothis/nwserver:${{ inputs.channel }}
+          ghcr.io/${{ github.repository }}:${{ inputs.channel }}:
+          urothis/nwserver:${{ inputs.channel }}-bookworm
+          ghcr.io/${{ github.repository }}:${{ inputs.channel }}-bookworm
     - name: Bookworm docker semver image
       if: ${{ inputs.tag_semver }} == 'true'
       uses: docker/build-push-action@v3
@@ -187,10 +187,10 @@ runs:
           com.nwn.version=${{ steps.nwn.outputs.version }}
           com.nwn.description="docker image for running a Neverwinter Nights 1 server on Linux"
         tags: |
-          urothis/nwserver:${{ input.channel }}
-          ghcr.io/${{ github.repository }}:${{ input.channel }}:
-          urothis/nwserver:${{ input.channel }}-bullseye
-          ghcr.io/${{ github.repository }}:${{ input.channel }}-bullseye
+          urothis/nwserver:${{ inputs.channel }}
+          ghcr.io/${{ github.repository }}:${{ inputs.channel }}:
+          urothis/nwserver:${{ inputs.channel }}-bullseye
+          ghcr.io/${{ github.repository }}:${{ inputs.channel }}-bullseye
     - name: Bullseye docker image
       if: ${{ inputs.tag_semver }} == 'true'
       uses: docker/build-push-action@v3
@@ -236,10 +236,10 @@ runs:
           com.nwn.version=${{ steps.nwn.outputs.version }}
           com.nwn.description="docker image for running a Neverwinter Nights 1 server on Linux"
         tags: |
-          urothis/nwserver:${{ input.channel }}
-          ghcr.io/${{ github.repository }}:${{ input.channel }}:
-          urothis/nwserver:${{ input.channel }}-buster
-          ghcr.io/${{ github.repository }}:${{ input.channel }}-buster
+          urothis/nwserver:${{ inputs.channel }}
+          ghcr.io/${{ github.repository }}:${{ inputs.channel }}:
+          urothis/nwserver:${{ inputs.channel }}-buster
+          ghcr.io/${{ github.repository }}:${{ inputs.channel }}-buster
     - name: Buster docker semver images
       if: ${{ inputs.tag_semver }} == 'true'
       uses: docker/build-push-action@v3
