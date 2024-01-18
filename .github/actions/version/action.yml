@@ -20,7 +20,7 @@ outputs:
     value: ${{ steps.nwn.outputs.development }}
   preview:
     description: "Preview version"
-    value: ${{ steps.nwn.outputs.prewview }}
+    value: ${{ steps.nwn.outputs.preview }}
   json:
     description: "NWN Versions"
     value: ${{ steps.nwn.outputs.json }}
