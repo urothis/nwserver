@@ -14,13 +14,13 @@ inputs:
 outputs:
   stable:
     description: "Stable version"
-    value: ${{ steps.nwn.outputs.major }}
+    value: ${{ steps.nwn.outputs.stable }}
   development:
     description: "Development version"
-    value: ${{ steps.nwn.outputs.minor }}
+    value: ${{ steps.nwn.outputs.development }}
   preview:
     description: "Preview version"
-    value: ${{ steps.nwn.outputs.patch }}
+    value: ${{ steps.nwn.outputs.prewview }}
   json:
     description: "NWN Versions"
     value: ${{ steps.nwn.outputs.json }}
