@@ -46,11 +46,12 @@ jobs:
             if [ ${{ needs.versioning.outputs.preview }} == ${{ needs.versioning.outputs.stable }} ]; then
               SHOULD_SEMVER=false
             fi
-            elif [ ${{ needs.versioning.outputs.preview }} == ${{ needs.versioning.outputs.development }} ]; then
+            if [ ${{ needs.versioning.outputs.preview }} == ${{ needs.versioning.outputs.development }} ]; then
               SHOULD_SEMVER=false
             fi
           fi
           echo "SHOULD_SEMVER=$SHOULD_SEMVER" >> $GITHUB_ENV
+
       - name: NWNEE
         id: nwn
         uses: ./.github/actions/nwserver/
