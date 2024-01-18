@@ -8,6 +8,9 @@ jobs:
       - name: version
         id: version
         uses: ./.github/actions/version/
+        with:
+          steam_username: ${{ secrets.STEAM_USER }}
+          steam_password: ${{ secrets.STEAM_PASS }}
       - run: |
           echo "stable: ${{ steps.version.outputs.stable }}"
           echo "development: ${{ steps.version.outputs.development }}"
