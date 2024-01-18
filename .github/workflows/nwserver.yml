@@ -9,6 +9,7 @@ jobs:
       preview: ${{ steps.version.outputs.preview }}
       json: ${{ steps.version.outputs.json }}
     steps:
+      - uses: actions/checkout@v4
       - name: version
         id: version
         uses: ./.github/actions/version/
@@ -33,6 +34,7 @@ jobs:
             env:
               SEMVER: ${{ needs.versioning.outputs.preview }}
     steps:
+      - uses: actions/checkout@v4
       - name: should_semver
         run: |
           SHOULD_SEMVER=false
