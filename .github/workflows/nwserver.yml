@@ -26,11 +26,9 @@ jobs:
             env:
               SEMVER: ${{ needs.versioning.outputs.stable }}
           - name: development
-            if: needs.versioning.outputs.stable != needs.versioning.outputs.development
             env:
               SEMVER: ${{ needs.versioning.outputs.development }}
           - name: preview
-            if: needs.versioning.outputs.stable != needs.versioning.outputs.development && needs.versioning.outputs.development != needs.versioning.outputs.preview
             env:
               SEMVER: ${{ needs.versioning.outputs.preview }}
     steps:
@@ -40,7 +38,6 @@ jobs:
           SHOULD_SEMVER=false
           if [ ${{ matrix.name }} == 'stable' ]; then
             SHOULD_SEMVER=true
-          fi
           elif [ ${{ matrix.name }} == 'development' ]; then
             if [ ${{ needs.versioning.outputs.stable }} == ${{ needs.versioning.outputs.development }} ]; then
               SHOULD_SEMVER=false
