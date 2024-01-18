@@ -1,4 +1,5 @@
 name: "Download nwserver"
+description: "Download nwserver files from Steam"
 inputs:
   preview:
     description: "Preview version"

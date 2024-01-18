@@ -3,15 +3,20 @@ on:
 jobs:
   build_push:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        channel: [preview, release]
     steps:
       - uses: actions/checkout@v4
-      - name: NWNEE
-        id: nwn
-        uses: ./.github/actions/nwserver/
-        with:
-          preview: ${{ matrix.channel == 'preview' }}
-          steam_username: ${{ secrets.STEAM_USER }}
-          steam_password: ${{ secrets.STEAM_PASS }}
+      - name: version
+        id: version
+        uses: ./.github/actions/version/
+      - run: |
+          echo "stable: ${{ steps.version.outputs.stable }}"
+          echo "development: ${{ steps.version.outputs.development }}"
+          echo "preview": ${{ steps.version.outputs.preview }}
+          echo "json": ${{ steps.version.outputs.json }}
+
+      #- name: NWNEE
+      #  id: nwn
+      #  uses: ./.github/actions/nwserver/
+      #  with:
+      #    steam_username: ${{ secrets.STEAM_USER }}
+      #    steam_password: ${{ secrets.STEAM_PASS }}
