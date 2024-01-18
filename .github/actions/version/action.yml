@@ -64,4 +64,4 @@ runs:
         rm -rf DepotDownloader/DepotDownloader/depots/${{ inputs.nwn_win_bin_depot_id }}/
 
         # Create json file
-        echo json="{\"stable\": \"$STABLE_VERSION\", \"development\": \"$DEVELOPMENT_STABLE_VERSION\", \"preview\": \"$PREVIEW_VERSION\"}" >> $GITHUB_OUTPUT
+        echo json="{\"stable\": \"$(cat $GITHUB_OUTPUT | grep stable | cut -d'=' -f2)\", \" development\": \"$(cat $GITHUB_OUTPUT | grep development | cut -d'=' -f2)\", \" preview\": \"$(cat $GITHUB_OUTPUT | grep preview | cut -d'=' -f2)\"}" >> $GITHUB_OUTPUT
