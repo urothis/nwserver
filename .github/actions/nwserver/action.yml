@@ -1,8 +1,12 @@
 name: "Download nwserver"
 description: "Download nwserver files from Steam"
 inputs:
-  preview:
-    description: "Preview version"
+  channel:
+    description: "Channel"
+    required: true
+    default: "stable"
+  tag_semver:
+    description: "Tag semver"
     required: true
     default: "false"
   steam_username:
@@ -52,8 +56,10 @@ runs:
       shell: bash
       run: |
         cd DepotDownloader/DepotDownloader
-        if [ "${{ inputs.preview }}" = "true" ]; then
+        if [ "${{ inputs.channel }}" = "preview" ]; then
           EXTRA_ARGS="-betapassword previewpreview -beta preview"
+        elif [ "${{ inputs.channel }}" = "Development" ]; then
+          EXTRA_ARGS="-beta development"
         else
           EXTRA_ARGS=""
         fi
@@ -132,6 +138,30 @@ runs:
           com.nwn.version=${{ steps.nwn.outputs.version }}
           com.nwn.description="docker image for running a Neverwinter Nights 1 server on Linux"
         tags: |
+          urothis/nwserver:${{ input.channel }}
+          ghcr.io/${{ github.repository }}:${{ input.channel }}:
+          urothis/nwserver:${{ input.channel }}-bookworm
+          ghcr.io/${{ github.repository }}:${{ input.channel }}-bookworm
+    - name: Bookworm docker semver image
+      if: ${{ inputs.tag_semver }} == 'true'
+      uses: docker/build-push-action@v3
+      with:
+        file: Dockerfile
+        context: .
+        platforms: |
+          linux/amd64
+          linux/arm64
+        push: false
+        build-args: |
+          DEBIAN_VERSION=bookworm-slim
+          NWN_IMAGE_BUILD_DATE=${{ steps.nwn.outputs.now }}
+          NWN_VERSION=${{ steps.nwn.outputs.version }}
+        labels: |
+          org.opencontainers.image.source=https://github.com/urothis/nwserver
+          com.nwn.revision=${{ steps.nwn.outputs.version }}
+          com.nwn.version=${{ steps.nwn.outputs.version }}
+          com.nwn.description="docker image for running a Neverwinter Nights 1 server on Linux"
+        tags: |
           urothis/nwserver:${{ steps.nwn.outputs.version }}-bookworm
           urothis/nwserver:${{ steps.nwn.outputs.major }}.${{ steps.nwn.outputs.minor }}-bookworm
           urothis/nwserver:${{ steps.nwn.outputs.major }}-bookworm
@@ -157,6 +187,30 @@ runs:
           com.nwn.version=${{ steps.nwn.outputs.version }}
           com.nwn.description="docker image for running a Neverwinter Nights 1 server on Linux"
         tags: |
+          urothis/nwserver:${{ input.channel }}
+          ghcr.io/${{ github.repository }}:${{ input.channel }}:
+          urothis/nwserver:${{ input.channel }}-bullseye
+          ghcr.io/${{ github.repository }}:${{ input.channel }}-bullseye
+    - name: Bullseye docker image
+      if: ${{ inputs.tag_semver }} == 'true'
+      uses: docker/build-push-action@v3
+      with:
+        file: Dockerfile
+        context: .
+        platforms: |
+          linux/amd64
+          linux/arm64
+        push: false
+        build-args: |
+          DEBIAN_VERSION=bullseye-slim
+          NWN_IMAGE_BUILD_DATE=${{ steps.nwn.outputs.now }}
+          NWN_VERSION=${{ steps.nwn.outputs.version }}
+        labels: |
+          org.opencontainers.image.source=https://github.com/urothis/nwserver
+          com.nwn.revision=${{ steps.nwn.outputs.version }}
+          com.nwn.version=${{ steps.nwn.outputs.version }}
+          com.nwn.description="docker image for running a Neverwinter Nights 1 server on Linux"
+        tags: |
           urothis/nwserver:${{ steps.nwn.outputs.version }}-bullseye
           urothis/nwserver:${{ steps.nwn.outputs.major }}.${{ steps.nwn.outputs.minor }}-bullseye
           urothis/nwserver:${{ steps.nwn.outputs.major }}-bullseye
@@ -164,6 +218,30 @@ runs:
           ghcr.io/${{ github.repository }}:${{ steps.nwn.outputs.major }}.${{ steps.nwn.outputs.minor }}-bullseye
           ghcr.io/${{ github.repository }}:${{ steps.nwn.outputs.major }}-bullseye
     - name: Buster docker image
+      uses: docker/build-push-action@v3
+      with:
+        file: Dockerfile
+        context: .
+        platforms: |
+          linux/amd64
+          linux/arm64
+        push: false
+        build-args: |
+          DEBIAN_VERSION=buster-slim
+          NWN_IMAGE_BUILD_DATE=${{ steps.nwn.outputs.now }}
+          NWN_VERSION=${{ steps.nwn.outputs.version }}
+        labels: |
+          org.opencontainers.image.source=https://github.com/urothis/nwserver
+          com.nwn.revision=${{ steps.nwn.outputs.version }}
+          com.nwn.version=${{ steps.nwn.outputs.version }}
+          com.nwn.description="docker image for running a Neverwinter Nights 1 server on Linux"
+        tags: |
+          urothis/nwserver:${{ input.channel }}
+          ghcr.io/${{ github.repository }}:${{ input.channel }}:
+          urothis/nwserver:${{ input.channel }}-buster
+          ghcr.io/${{ github.repository }}:${{ input.channel }}-buster
+    - name: Buster docker semver images
+      if: ${{ inputs.tag_semver }} == 'true'
       uses: docker/build-push-action@v3
       with:
         file: Dockerfile

@@ -1,25 +1,62 @@
 on:
   pull_request:
 jobs:
-  build_push:
+  versioning:
     runs-on: ubuntu-latest
+    outputs:
+      stable: ${{ steps.version.outputs.stable }}
+      development: ${{ steps.version.outputs.development }}
+      preview: ${{ steps.version.outputs.preview }}
+      json: ${{ steps.version.outputs.json }}
     steps:
-      - uses: actions/checkout@v4
       - name: version
         id: version
         uses: ./.github/actions/version/
         with:
           steam_username: ${{ secrets.STEAM_USER }}
           steam_password: ${{ secrets.STEAM_PASS }}
-      - run: |
-          echo "stable: ${{ steps.version.outputs.stable }}"
-          echo "development: ${{ steps.version.outputs.development }}"
-          echo "preview": ${{ steps.version.outputs.preview }}
-          echo "json": ${{ steps.version.outputs.json }}
-
-      #- name: NWNEE
-      #  id: nwn
-      #  uses: ./.github/actions/nwserver/
-      #  with:
-      #    steam_username: ${{ secrets.STEAM_USER }}
-      #    steam_password: ${{ secrets.STEAM_PASS }}
+  build:
+    runs-on: ubuntu-latest
+    needs: versioning
+    strategy:
+      matrix:
+        include:
+          - name: stable
+            env:
+              SEMVER: ${{ needs.versioning.outputs.stable }}
+          - name: development
+            if: needs.versioning.outputs.stable != needs.versioning.outputs.development
+            env:
+              SEMVER: ${{ needs.versioning.outputs.development }}
+          - name: preview
+            if: needs.versioning.outputs.stable != needs.versioning.outputs.development && needs.versioning.outputs.development != needs.versioning.outputs.preview
+            env:
+              SEMVER: ${{ needs.versioning.outputs.preview }}
+    steps:
+      - name: should_semver
+        run: |
+          SHOULD_SEMVER=false
+          if [ ${{ matrix.name }} == 'stable' ]; then
+            SHOULD_SEMVER=true
+          fi
+          elif [ ${{ matrix.name }} == 'development' ]; then
+            if [ ${{ needs.versioning.outputs.stable }} == ${{ needs.versioning.outputs.development }} ]; then
+              SHOULD_SEMVER=false
+            fi
+          elif [ ${{ matrix.name }} == 'preview' ]; then
+            if [ ${{ needs.versioning.outputs.preview }} == ${{ needs.versioning.outputs.stable }} ]; then
+              SHOULD_SEMVER=false
+            fi
+            elif [ ${{ needs.versioning.outputs.preview }} == ${{ needs.versioning.outputs.development }} ]; then
+              SHOULD_SEMVER=false
+            fi
+          fi
+          echo "SHOULD_SEMVER=$SHOULD_SEMVER" >> $GITHUB_ENV
+      - name: NWNEE
+        id: nwn
+        uses: ./.github/actions/nwserver/
+        with:
+          steam_username: ${{ secrets.STEAM_USER }}
+          steam_password: ${{ secrets.STEAM_PASS }}
+          channel: ${{ matrix.name }}
+          tag_semver: ${{ env.SHOULD_SEMVER }}
