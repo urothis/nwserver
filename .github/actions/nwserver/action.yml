@@ -139,8 +139,8 @@ runs:
           com.nwn.description="docker image for running a Neverwinter Nights 1 server on Linux"
         tags: |
           urothis/nwserver:${{ inputs.channel }}
-          ghcr.io/${{ github.repository }}:${{ inputs.channel }}:
           urothis/nwserver:${{ inputs.channel }}-bookworm
+          ghcr.io/${{ github.repository }}:${{ inputs.channel }}
           ghcr.io/${{ github.repository }}:${{ inputs.channel }}-bookworm
     - name: Bookworm docker semver image
       if: ${{ inputs.tag_semver }} == 'true'
@@ -162,9 +162,15 @@ runs:
           com.nwn.version=${{ steps.nwn.outputs.version }}
           com.nwn.description="docker image for running a Neverwinter Nights 1 server on Linux"
         tags: |
+          urothis/nwserver:${{ steps.nwn.outputs.version }}
+          urothis/nwserver:${{ steps.nwn.outputs.major }}.${{ steps.nwn.outputs.minor }}
+          urothis/nwserver:${{ steps.nwn.outputs.major }}
           urothis/nwserver:${{ steps.nwn.outputs.version }}-bookworm
           urothis/nwserver:${{ steps.nwn.outputs.major }}.${{ steps.nwn.outputs.minor }}-bookworm
           urothis/nwserver:${{ steps.nwn.outputs.major }}-bookworm
+          ghcr.io/${{ github.repository }}:${{ steps.nwn.outputs.version }}
+          ghcr.io/${{ github.repository }}:${{ steps.nwn.outputs.major }}.${{ steps.nwn.outputs.minor }}
+          ghcr.io/${{ github.repository }}:${{ steps.nwn.outputs.major }}
           ghcr.io/${{ github.repository }}:${{ steps.nwn.outputs.version }}-bookworm
           ghcr.io/${{ github.repository }}:${{ steps.nwn.outputs.major }}.${{ steps.nwn.outputs.minor }}-bookworm
           ghcr.io/${{ github.repository }}:${{ steps.nwn.outputs.major }}-bookworm
@@ -188,8 +194,8 @@ runs:
           com.nwn.description="docker image for running a Neverwinter Nights 1 server on Linux"
         tags: |
           urothis/nwserver:${{ inputs.channel }}
-          ghcr.io/${{ github.repository }}:${{ inputs.channel }}:
           urothis/nwserver:${{ inputs.channel }}-bullseye
+          ghcr.io/${{ github.repository }}:${{ inputs.channel }}
           ghcr.io/${{ github.repository }}:${{ inputs.channel }}-bullseye
     - name: Bullseye docker image
       if: ${{ inputs.tag_semver }} == 'true'
@@ -211,9 +217,15 @@ runs:
           com.nwn.version=${{ steps.nwn.outputs.version }}
           com.nwn.description="docker image for running a Neverwinter Nights 1 server on Linux"
         tags: |
+          urothis/nwserver:${{ steps.nwn.outputs.version }}
+          urothis/nwserver:${{ steps.nwn.outputs.major }}.${{ steps.nwn.outputs.minor }}
+          urothis/nwserver:${{ steps.nwn.outputs.major }}
           urothis/nwserver:${{ steps.nwn.outputs.version }}-bullseye
           urothis/nwserver:${{ steps.nwn.outputs.major }}.${{ steps.nwn.outputs.minor }}-bullseye
           urothis/nwserver:${{ steps.nwn.outputs.major }}-bullseye
+          ghcr.io/${{ github.repository }}:${{ steps.nwn.outputs.version }}
+          ghcr.io/${{ github.repository }}:${{ steps.nwn.outputs.major }}.${{ steps.nwn.outputs.minor }}
+          ghcr.io/${{ github.repository }}:${{ steps.nwn.outputs.major }}
           ghcr.io/${{ github.repository }}:${{ steps.nwn.outputs.version }}-bullseye
           ghcr.io/${{ github.repository }}:${{ steps.nwn.outputs.major }}.${{ steps.nwn.outputs.minor }}-bullseye
           ghcr.io/${{ github.repository }}:${{ steps.nwn.outputs.major }}-bullseye
@@ -237,8 +249,8 @@ runs:
           com.nwn.description="docker image for running a Neverwinter Nights 1 server on Linux"
         tags: |
           urothis/nwserver:${{ inputs.channel }}
-          ghcr.io/${{ github.repository }}:${{ inputs.channel }}:
           urothis/nwserver:${{ inputs.channel }}-buster
+          ghcr.io/${{ github.repository }}:${{ inputs.channel }}
           ghcr.io/${{ github.repository }}:${{ inputs.channel }}-buster
     - name: Buster docker semver images
       if: ${{ inputs.tag_semver }} == 'true'
@@ -263,12 +275,12 @@ runs:
           urothis/nwserver:${{ steps.nwn.outputs.version }}
           urothis/nwserver:${{ steps.nwn.outputs.major }}.${{ steps.nwn.outputs.minor }}
           urothis/nwserver:${{ steps.nwn.outputs.major }}
-          ghcr.io/${{ github.repository }}:${{ steps.nwn.outputs.version }}
-          ghcr.io/${{ github.repository }}:${{ steps.nwn.outputs.major }}.${{ steps.nwn.outputs.minor }}
-          ghcr.io/${{ github.repository }}:${{ steps.nwn.outputs.major }}
           urothis/nwserver:${{ steps.nwn.outputs.version }}-buster
           urothis/nwserver:${{ steps.nwn.outputs.major }}.${{ steps.nwn.outputs.minor }}-buster
           urothis/nwserver:${{ steps.nwn.outputs.major }}-buster
+          ghcr.io/${{ github.repository }}:${{ steps.nwn.outputs.version }}
+          ghcr.io/${{ github.repository }}:${{ steps.nwn.outputs.major }}.${{ steps.nwn.outputs.minor }}
+          ghcr.io/${{ github.repository }}:${{ steps.nwn.outputs.major }}
           ghcr.io/${{ github.repository }}:${{ steps.nwn.outputs.version }}-buster
           ghcr.io/${{ github.repository }}:${{ steps.nwn.outputs.major }}.${{ steps.nwn.outputs.minor }}-buster
           ghcr.io/${{ github.repository }}:${{ steps.nwn.outputs.major }}-buster
