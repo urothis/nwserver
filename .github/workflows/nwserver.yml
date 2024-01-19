@@ -95,15 +95,14 @@ jobs:
           echo now=$(date '+%Y%m%d') >> $GITHUB_OUTPUT
           echo "Last Updated: \`$(date)\`" >> README.md
           echo "" >> README.md
-          echo "Overview:"
-          echo "This repository automates the Docker build process for nwserver and distributing the built images across multiple registries. Daily builds are performed to ensure that the images are up to date with the latest version of nwserver. The images are built using the latest version of nwserver available on Steam."
-          echo "The images are built for the following platforms:"
+          echo "## Overview:" >> README.md
+          echo "This repository automates the Docker build process for nwserver and distributing the built images across multiple registries. Daily builds are performed to ensure that the images are up to date with the latest version of nwserver. The images are built using the latest version of nwserver available on Steam." >> README.md
+          echo "The images are built for the following platforms:" >> README.md
           echo "" >> README.md
-          echo "- \`linux/amd64\`"
-          echo "- \`linux/arm64\`"
-          echo ""
+          echo "- \`linux/amd64\`" >> README.md
+          echo "- \`linux/arm64\`" >> README.md
           echo "" >> README.md
-          echo "## Stable" >> README.md
+          echo "### Stable" >> README.md
           echo "\`${{ needs.versioning.outputs.stable }}\`" >> README.md
           echo "" >> README.md
           echo "Tags: " >> README.md
@@ -115,7 +114,7 @@ jobs:
             done
           done
           echo "" >> README.md
-          echo "## Development" >> README.md
+          echo "### Development" >> README.md
           echo "\`${{ needs.versioning.outputs.development }}\`" >> README.md
           echo "" >> README.md
           echo "Tags: " >> README.md
@@ -129,7 +128,7 @@ jobs:
             done
           done
           echo "" >> README.md
-          echo "## Preview" >> README.md
+          echo "### Preview" >> README.md
           echo "\`${{ needs.versioning.outputs.preview }}\`" >> README.md
           echo "" >> README.md
           echo "Tags: " >> README.md
