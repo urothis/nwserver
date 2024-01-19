@@ -59,7 +59,9 @@ jobs:
           steam_password: ${{ secrets.STEAM_PASS }}
           channel: ${{ matrix.name }}
           tag_semver: ${{ env.SHOULD_SEMVER }}
-
+          dockerhub_username: ${{ secrets.DOCKERHUB_USERNAME }}
+          dockerhub_token: ${{ secrets.DOCKERHUB_TOKEN }}
+          gh_access_token: ${{ secrets.GH_ACCESS_TOKEN }}
 
   Report:
     runs-on: ubuntu-latest
