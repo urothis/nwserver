@@ -64,46 +64,38 @@ jobs:
           dockerhub_username: ${{ secrets.DOCKERHUB_USERNAME }}
           dockerhub_token: ${{ secrets.DOCKERHUB_TOKEN }}
           gh_access_token: ${{ secrets.GH_ACCESS_TOKEN }}
-
   Report:
     runs-on: ubuntu-latest
     needs: [ build, versioning ]
     steps:
       - uses: actions/checkout@v4
-
-
       - name: Create or Update README.md
         run: |
-          if [[ "${{ needs.versioning.outputs.stable }}" == "${{ needs.versioning.outputs.development }}" ]]; then
+          if [[ "${{ needs.versioning.outputs.stable }}" != "${{ needs.versioning.outputs.development }}" ]]; then
             echo "SHOULD_SEMVER_DEVELOPMENT=true" >> $GITHUB_ENV
           else
             echo "SHOULD_SEMVER_DEVELOPMENT=false" >> $GITHUB_ENV
           fi
-
-          if [[ "${{ needs.versioning.outputs.stable }}" == "${{ needs.versioning.outputs.preview }}" ]] || [[ "${{ needs.versioning.outputs.development }}" == "${{ needs.versioning.outputs.preview }}" ]]; then
+          if [[ "${{ needs.versioning.outputs.stable }}" != "${{ needs.versioning.outputs.preview }}" ]] || [[ "${{ needs.versioning.outputs.development }}" != "${{ needs.versioning.outputs.preview }}" ]]; then
             echo "SHOULD_SEMVER_PREVIEW=true" >> $GITHUB_ENV
           else
             echo "SHOULD_SEMVER_PREVIEW=false" >> $GITHUB_ENV
           fi
-
           rm -f README.md
           echo "# <b>nwserver</b>" > README.md
           echo "" >> README.md
           echo now=$(date '+%Y%m%d') >> $GITHUB_OUTPUT
           echo "Last Updated: \`$(date)\`" >> README.md
           echo "" >> README.md
-          echo "## Version" >> README.md
-          echo "" >> README.md
           echo "## Stable" >> README.md
           echo "\`${{ needs.versioning.outputs.stable }}\`" >> README.md
           echo "" >> README.md
           echo "Tags: " >> README.md
           echo "" >> README.md
-          echo "- `ghcr.io/urothis/nwserver:${{ needs.versioning.outputs.stable }}`" >> README.md
-          echo "- `urothis/nwserver:${{ needs.versioning.outputs.stable }}`" >> README.md
-          echo "- `ghcr.io/urothis/nwserver:stable`" >> README.md
-          echo "- `urothis/nwserver:stable`" >> README.md
-
+          echo "- \`ghcr.io/urothis/nwserver:${{ needs.versioning.outputs.stable }}\`" >> README.md
+          echo "- \`urothis/nwserver:${{ needs.versioning.outputs.stable }}\`" >> README.md
+          echo "- \`ghcr.io/urothis/nwserver:stable\`" >> README.md
+          echo "- \`urothis/nwserver:stable\`" >> README.md
           echo "" >> README.md
           echo "## Development" >> README.md
           echo "\`${{ needs.versioning.outputs.development }}\`" >> README.md
@@ -111,12 +103,11 @@ jobs:
           echo "Tags: " >> README.md
           echo "" >> README.md
           if [[ "${{ env.SHOULD_SEMVER_DEVELOPMENT }}" == "true" ]]; then
-            echo "- `ghcr.io/urothis/nwserver:${{ needs.versioning.outputs.development }}`" >> README.md
-            echo "- `urothis/nwserver:${{ needs.versioning.outputs.development }}`" >> README.md
+            echo "- \`ghcr.io/urothis/nwserver:${{ needs.versioning.outputs.development }}\`" >> README.md
+            echo "- \`urothis/nwserver:${{ needs.versioning.outputs.development }}\`" >> README.md
           fi
-          echo "- `ghcr.io/urothis/nwserver:development`" >> README.md
-          echo "- `urothis/nwserver:development`" >> README.md
-
+          echo "- \`ghcr.io/urothis/nwserver:development\`" >> README.md
+          echo "- \`urothis/nwserver:development\`" >> README.md
           echo "" >> README.md
           echo "## Preview" >> README.md
           echo "\`${{ needs.versioning.outputs.preview }}\`" >> README.md
@@ -124,11 +115,11 @@ jobs:
           echo "Tags: " >> README.md
           echo "" >> README.md
           if [[ "${{ env.SHOULD_SEMVER_PREVIEW }}" == "true" ]]; then
-            echo "- `ghcr.io/urothis/nwserver:${{ needs.versioning.outputs.preview }}`" >> README.md
-            echo "- `urothis/nwserver:${{ needs.versioning.outputs.preview }}`" >> README.md
+            echo "- \`ghcr.io/urothis/nwserver:${{ needs.versioning.outputs.preview }}\`" >> README.md
+            echo "- \`urothis/nwserver:${{ needs.versioning.outputs.preview }}\`" >> README.md
           fi
-          echo "- `ghcr.io/urothis/nwserver:preview`" >> README.md
-          echo "- `urothis/nwserver:preview`" >> README.md
+          echo "- \`ghcr.io/urothis/nwserver:preview\`" >> README.md
+          echo "- \`urothis/nwserver:preview\`" >> README.md
       - name: Install jq
         run: sudo apt-get install -y jq
       - name: write version json to file
