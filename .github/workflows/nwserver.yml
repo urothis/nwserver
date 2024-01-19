@@ -77,6 +77,7 @@ jobs:
           PREVIEW: ${{ needs.versioning.outputs.preview }}
         run: |
           ADDITIONAL_TAGS=("", "-buster" "-bullseye" "-bookworm")
+          REGISTRIES=("ghcr.io/urothis/nwserver" "urothis/nwserver")
 
           if [[ "$STABLE" != "$DEVELOPMENT" ]]; then
             echo "SHOULD_SEMVER_DEVELOPMENT=true" >> $GITHUB_ENV
@@ -107,11 +108,11 @@ jobs:
           echo "" >> README.md
           echo "Tags: " >> README.md
           echo "" >> README.md
-          for tag in "${ADDITIONAL_TAGS[@]}"; do
-            echo "- \`ghcr.io/urothis/nwserver:stable$tag\`" >> README.md
-            echo "- \`ghcr.io/urothis/nwserver:${{ needs.versioning.outputs.stable }}$tag\`" >> README.md
-            echo "- \`urothis/nwserver:stable$tag\`" >> README.md
-            echo "- \`urothis/nwserver:${{ needs.versioning.outputs.stable }}$tag\`" >> README.md
+          for registry in "${REGISTRIES[@]}"; do
+            for tag in "${ADDITIONAL_TAGS[@]}"; do
+              echo "- \`${registry}:stable$tag\`" >> README.md
+              echo "- \`${registry}:${{ needs.versioning.outputs.stable }}$tag\`" >> README.md
+            done
           done
           echo "" >> README.md
           echo "## Development" >> README.md
@@ -119,15 +120,13 @@ jobs:
           echo "" >> README.md
           echo "Tags: " >> README.md
           echo "" >> README.md
-          for tag in "${ADDITIONAL_TAGS[@]}"; do
-            echo "- \`ghcr.io/urothis/nwserver:development$tag\`" >> README.md
-            if [[ "$SHOULD_SEMVER_DEVELOPMENT" == "true" ]]; then
-              echo "- \`ghcr.io/urothis/nwserver:${{ needs.versioning.outputs.development }}$tag\`" >> README.md
-            fi
-            echo "- \`urothis/nwserver:development$tag\`" >> README.md
-            if [[ "$SHOULD_SEMVER_DEVELOPMENT" == "true" ]]; then
-              echo "- \`urothis/nwserver:${{ needs.versioning.outputs.development }}$tag\`" >> README.md
-            fi
+          for registry in "${REGISTRIES[@]}"; do
+            for tag in "${ADDITIONAL_TAGS[@]}"; do
+              echo "- \`${registry}:development$tag\`" >> README.md
+              if [[ "$SHOULD_SEMVER_DEVELOPMENT" == "true" ]]; then
+                echo "- \`${registry}:${{ needs.versioning.outputs.development }}$tag\`" >> README.md
+              fi
+            done
           done
           echo "" >> README.md
           echo "## Preview" >> README.md
@@ -135,15 +134,13 @@ jobs:
           echo "" >> README.md
           echo "Tags: " >> README.md
           echo "" >> README.md
-          for tag in "${ADDITIONAL_TAGS[@]}"; do
-            echo "- \`ghcr.io/urothis/nwserver:preview$tag\`" >> README.md
-            if [[ "$SHOULD_SEMVER_PREVIEW" == "true" ]]; then
-              echo "- \`ghcr.io/urothis/nwserver:${{ needs.versioning.outputs.preview }}$tag\`" >> README.md
-            fi
-            echo "- \`urothis/nwserver:preview$tag\`" >> README.md
-            if [[ "$SHOULD_SEMVER_PREVIEW" == "true" ]]; then
-              echo "- \`urothis/nwserver:${{ needs.versioning.outputs.preview }}$tag\`" >> README.md
-            fi
+          for registry in "${REGISTRIES[@]}"; do
+            for tag in "${ADDITIONAL_TAGS[@]}"; do
+              echo "- \`${registry}:preview$tag\`" >> README.md
+              if [[ "$SHOULD_SEMVER_PREVIEW" == "true" ]]; then
+                echo "- \`${registry}:${{ needs.versioning.outputs.preview }}$tag\`" >> README.md
+              fi
+            done
           done
 
       - name: Install jq
