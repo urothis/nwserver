@@ -112,6 +112,7 @@ jobs:
               echo "- \`${registry}:stable$tag\`" >> README.md
               echo "- \`${registry}:${{ needs.versioning.outputs.stable }}$tag\`" >> README.md
             done
+            echo "---" >> README.md
           done
           echo "" >> README.md
           echo "### Development" >> README.md
@@ -126,6 +127,7 @@ jobs:
                 echo "- \`${registry}:${{ needs.versioning.outputs.development }}$tag\`" >> README.md
               fi
             done
+            echo "---" >> README.md
           done
           echo "" >> README.md
           echo "### Preview" >> README.md
@@ -140,6 +142,7 @@ jobs:
                 echo "- \`${registry}:${{ needs.versioning.outputs.preview }}$tag\`" >> README.md
               fi
             done
+            echo "---" >> README.md
           done
 
       - name: Install jq
