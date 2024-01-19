@@ -163,7 +163,7 @@ runs:
           ghcr.io/${{ github.repository }}:${{ inputs.channel }}
           ghcr.io/${{ github.repository }}:${{ inputs.channel }}-bookworm
     - name: Bookworm docker semver image
-      if: ${{ inputs.tag_semver }} == 'true'
+      if: inputs.tag_semver == 'true'
       uses: docker/build-push-action@v3
       with:
         file: Dockerfile
@@ -218,7 +218,7 @@ runs:
           ghcr.io/${{ github.repository }}:${{ inputs.channel }}
           ghcr.io/${{ github.repository }}:${{ inputs.channel }}-bullseye
     - name: Bullseye docker image
-      if: ${{ inputs.tag_semver }} == 'true'
+      if: inputs.tag_semver == 'true'
       uses: docker/build-push-action@v3
       with:
         file: Dockerfile
@@ -273,7 +273,7 @@ runs:
           ghcr.io/${{ github.repository }}:${{ inputs.channel }}
           ghcr.io/${{ github.repository }}:${{ inputs.channel }}-buster
     - name: Buster docker semver images
-      if: ${{ inputs.tag_semver }} == 'true'
+      if: inputs.tag_semver == 'true'
       uses: docker/build-push-action@v3
       with:
         file: Dockerfile
