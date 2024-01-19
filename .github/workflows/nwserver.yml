@@ -76,19 +76,19 @@ jobs:
           DEVELOPMENT: ${{ needs.versioning.outputs.development }}
           PREVIEW: ${{ needs.versioning.outputs.preview }}
         run: |
-          ADDITIONAL_TAGS=("", "-buster" "-bullseye" "-bookworm")
+          ADDITIONAL_TAGS=("" "-buster" "-bullseye" "-bookworm")
           REGISTRIES=("ghcr.io/urothis/nwserver" "urothis/nwserver")
 
           if [[ "$STABLE" != "$DEVELOPMENT" ]]; then
-            echo "SHOULD_SEMVER_DEVELOPMENT=true" >> $GITHUB_ENV
+            export SHOULD_SEMVER_DEVELOPMENT="true"
           else
-            echo "SHOULD_SEMVER_DEVELOPMENT=false" >> $GITHUB_ENV
+            export SHOULD_SEMVER_DEVELOPMENT="false"
           fi
 
           if [[ "$STABLE" != "$PREVIEW" ]] || [[ "$DEVELOPMENT" != "$PREVIEW" ]]; then
-            echo "SHOULD_SEMVER_PREVIEW=true" >> $GITHUB_ENV
+            export "SHOULD_SEMVER_PREVIEW="true"
           else
-            echo "SHOULD_SEMVER_PREVIEW=false" >> $GITHUB_ENV
+            export "SHOULD_SEMVER_PREVIEW="false"
           fi
           echo "# <b>nwserver</b>" > README.md
           echo "" >> README.md
