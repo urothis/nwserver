@@ -127,7 +127,7 @@ runs:
         platforms: |
           linux/amd64
           linux/arm64
-        push: false
+        push: true
         build-args: |
           DEBIAN_VERSION=bookworm-slim
           NWN_IMAGE_BUILD_DATE=${{ steps.nwn.outputs.now }}
@@ -151,7 +151,7 @@ runs:
         platforms: |
           linux/amd64
           linux/arm64
-        push: false
+        push: true
         build-args: |
           DEBIAN_VERSION=bookworm-slim
           NWN_IMAGE_BUILD_DATE=${{ steps.nwn.outputs.now }}
@@ -176,7 +176,7 @@ runs:
         platforms: |
           linux/amd64
           linux/arm64
-        push: false
+        push: true
         build-args: |
           DEBIAN_VERSION=bullseye-slim
           NWN_IMAGE_BUILD_DATE=${{ steps.nwn.outputs.now }}
@@ -200,7 +200,7 @@ runs:
         platforms: |
           linux/amd64
           linux/arm64
-        push: false
+        push: true
         build-args: |
           DEBIAN_VERSION=bullseye-slim
           NWN_IMAGE_BUILD_DATE=${{ steps.nwn.outputs.now }}
@@ -225,7 +225,7 @@ runs:
         platforms: |
           linux/amd64
           linux/arm64
-        push: false
+        push: true
         build-args: |
           DEBIAN_VERSION=buster-slim
           NWN_IMAGE_BUILD_DATE=${{ steps.nwn.outputs.now }}
@@ -249,7 +249,7 @@ runs:
         platforms: |
           linux/amd64
           linux/arm64
-        push: false
+        push: true
         build-args: |
           DEBIAN_VERSION=buster-slim
           NWN_IMAGE_BUILD_DATE=${{ steps.nwn.outputs.now }}
