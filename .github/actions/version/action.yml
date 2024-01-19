@@ -1,0 +1,67 @@
+name: "nwserver versions"
+description: "Download nwserver files from Steam"
+inputs:
+  steam_username:
+    description: "Steam username"
+    required: true
+  steam_password:
+    description: "Steam password"
+    required: true
+  nwn_win_bin_depot_id:
+    description: "NWN Win Bin Depot ID"
+    required: true
+    default: "704452"
+outputs:
+  stable:
+    description: "Stable version"
+    value: ${{ steps.nwn.outputs.stable }}
+  development:
+    description: "Development version"
+    value: ${{ steps.nwn.outputs.development }}
+  preview:
+    description: "Preview version"
+    value: ${{ steps.nwn.outputs.preview }}
+  json:
+    description: "NWN Versions"
+    value: ${{ steps.nwn.outputs.json }}
+runs:
+  using: "composite"
+  steps:
+    - uses: "actions/checkout@v3"
+    - name: Install semver
+      shell: bash
+      run: |
+        sudo apt install pev
+    - name: Clone SteamRE/DepotDownloader
+      shell: bash
+      run: |
+        git clone https://github.com/SteamRE/DepotDownloader.git
+    - name: Download nwnee files
+      shell: bash
+      id: nwn
+      run: |
+        cd DepotDownloader/DepotDownloader
+
+        # Stable
+        dotnet run -app 704450 -depot ${{ inputs.nwn_win_bin_depot_id }} -username ${{ inputs.steam_username }} -password ${{ inputs.steam_password }}
+        # Stable version
+        echo stable=$(peres -v depots/${{ inputs.nwn_win_bin_depot_id }}/*/bin/win32/nwserver.exe -f csv | grep -v DEBUG | cut -d'.' -f2- | sed -n 2p) >> $GITHUB_OUTPUT
+        # cleanup
+        rm -rf DepotDownloader/DepotDownloader/depots/${{ inputs.nwn_win_bin_depot_id }}/
+
+        # Development
+        dotnet run -app 704450 -depot ${{ inputs.nwn_win_bin_depot_id }} -username ${{ inputs.steam_username }} -password ${{ inputs.steam_password }} -beta development
+        # Development version
+        echo development=$(peres -v depots/${{ inputs.nwn_win_bin_depot_id }}/*/bin/win32/nwserver.exe -f csv | grep -v DEBUG | cut -d'.' -f2- | sed -n 2p) >> $GITHUB_OUTPUT
+        # cleanup
+        rm -rf DepotDownloader/DepotDownloader/depots/${{ inputs.nwn_win_bin_depot_id }}/
+
+        # Preview
+        dotnet run -app 704450 -depot ${{ inputs.nwn_win_bin_depot_id }} -username ${{ inputs.steam_username }} -password ${{ inputs.steam_password }} -betapassword previewpreview -beta preview
+        # Preview version
+        echo preview=$(peres -v depots/${{ inputs.nwn_win_bin_depot_id }}/*/bin/win32/nwserver.exe -f csv | grep -v DEBUG | cut -d'.' -f2- | sed -n 2p) >> $GITHUB_OUTPUT
+        # cleanup
+        rm -rf DepotDownloader/DepotDownloader/depots/${{ inputs.nwn_win_bin_depot_id }}/
+
+        # Create json file
+        echo json="{\"stable\": \"$(cat $GITHUB_OUTPUT | grep stable | cut -d'=' -f2)\", \" development\": \"$(cat $GITHUB_OUTPUT | grep development | cut -d'=' -f2)\", \" preview\": \"$(cat $GITHUB_OUTPUT | grep preview | cut -d'=' -f2)\"}" >> $GITHUB_OUTPUT
