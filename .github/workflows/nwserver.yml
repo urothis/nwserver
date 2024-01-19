@@ -120,12 +120,12 @@ jobs:
           echo "Tags: " >> README.md
           echo "" >> README.md
           for tag in "${ADDITIONAL_TAGS[@]}"; do
-            echo "- \`ghcr.io/urothis/nwserver:development\`" >> README.md
-            if [[ "${{ env.SHOULD_SEMVER_DEVELOPMENT }}" == "true" ]]; then
+            echo "- \`ghcr.io/urothis/nwserver:development$tag\`" >> README.md
+            if [[ "$SHOULD_SEMVER_DEVELOPMENT" == "true" ]]; then
               echo "- \`ghcr.io/urothis/nwserver:${{ needs.versioning.outputs.development }}$tag\`" >> README.md
             fi
-            echo "- \`urothis/nwserver:development\`" >> README.md
-            if [[ "${{ env.SHOULD_SEMVER_DEVELOPMENT }}" == "true" ]]; then
+            echo "- \`urothis/nwserver:development$tag\`" >> README.md
+            if [[ "$SHOULD_SEMVER_DEVELOPMENT" == "true" ]]; then
               echo "- \`urothis/nwserver:${{ needs.versioning.outputs.development }}$tag\`" >> README.md
             fi
           done
@@ -136,12 +136,12 @@ jobs:
           echo "Tags: " >> README.md
           echo "" >> README.md
           for tag in "${ADDITIONAL_TAGS[@]}"; do
-            echo "- \`ghcr.io/urothis/nwserver:preview\`" >> README.md
-            if [[ "${{ env.SHOULD_SEMVER_PREVIEW }}" == "true" ]]; then
+            echo "- \`ghcr.io/urothis/nwserver:preview$tag\`" >> README.md
+            if [[ "$SHOULD_SEMVER_PREVIEW" == "true" ]]; then
               echo "- \`ghcr.io/urothis/nwserver:${{ needs.versioning.outputs.preview }}$tag\`" >> README.md
             fi
-            echo "- \`urothis/nwserver:preview\`" >> README.md
-            if [[ "${{ env.SHOULD_SEMVER_PREVIEW }}" == "true" ]]; then
+            echo "- \`urothis/nwserver:preview$tag\`" >> README.md
+            if [[ "$SHOULD_SEMVER_PREVIEW" == "true" ]]; then
               echo "- \`urothis/nwserver:${{ needs.versioning.outputs.preview }}$tag\`" >> README.md
             fi
           done
