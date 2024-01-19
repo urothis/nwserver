@@ -71,18 +71,22 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Create or Update README.md
+        env:
+          STABLE: ${{ needs.versioning.outputs.stable }}
+          DEVELOPMENT: ${{ needs.versioning.outputs.development }}
+          PREVIEW: ${{ needs.versioning.outputs.preview }}
         run: |
-          if [[ "${{ needs.versioning.outputs.stable }}" != "${{ needs.versioning.outputs.development }}" ]]; then
+          if [[ "$STABLE" != "$DEVELOPMENT" ]]; then
             echo "SHOULD_SEMVER_DEVELOPMENT=true" >> $GITHUB_ENV
           else
             echo "SHOULD_SEMVER_DEVELOPMENT=false" >> $GITHUB_ENV
           fi
-          if [[ "${{ needs.versioning.outputs.stable }}" != "${{ needs.versioning.outputs.preview }}" ]] || [[ "${{ needs.versioning.outputs.development }}" != "${{ needs.versioning.outputs.preview }}" ]]; then
+
+          if [[ "$STABLE" != "$PREVIEW" ]] || [[ "$DEVELOPMENT" != "$PREVIEW" ]]; then
             echo "SHOULD_SEMVER_PREVIEW=true" >> $GITHUB_ENV
           else
             echo "SHOULD_SEMVER_PREVIEW=false" >> $GITHUB_ENV
           fi
-          rm -f README.md
           echo "# <b>nwserver</b>" > README.md
           echo "" >> README.md
           echo now=$(date '+%Y%m%d') >> $GITHUB_OUTPUT
@@ -94,8 +98,8 @@ jobs:
           echo "Tags: " >> README.md
           echo "" >> README.md
           echo "- \`ghcr.io/urothis/nwserver:${{ needs.versioning.outputs.stable }}\`" >> README.md
-          echo "- \`urothis/nwserver:${{ needs.versioning.outputs.stable }}\`" >> README.md
           echo "- \`ghcr.io/urothis/nwserver:stable\`" >> README.md
+          echo "- \`urothis/nwserver:${{ needs.versioning.outputs.stable }}\`" >> README.md
           echo "- \`urothis/nwserver:stable\`" >> README.md
           echo "" >> README.md
           echo "## Development" >> README.md
