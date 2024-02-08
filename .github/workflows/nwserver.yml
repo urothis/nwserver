@@ -2,7 +2,7 @@ name: 🚀 Generate Docker Images
 on:
   workflow_dispatch:
   schedule:
-    - cron: '0 0 * * 5'
+    - cron: '0 0 * * *'
 jobs:
   versioning:
     runs-on: ubuntu-latest
@@ -42,15 +42,15 @@ jobs:
           if [ ${{ matrix.name }} == 'stable' ]; then
             SHOULD_SEMVER=true
           elif [ ${{ matrix.name }} == 'development' ]; then
-            if [ ${{ needs.versioning.outputs.stable }} == ${{ needs.versioning.outputs.development }} ]; then
-              SHOULD_SEMVER=false
+            if [ ${{ needs.versioning.outputs.stable }} != ${{ needs.versioning.outputs.development }} ]; then
+              SHOULD_SEMVER=true
             fi
           elif [ ${{ matrix.name }} == 'preview' ]; then
-            if [ ${{ needs.versioning.outputs.preview }} == ${{ needs.versioning.outputs.stable }} ]; then
-              SHOULD_SEMVER=false
+            if [ ${{ needs.versioning.outputs.preview }} != ${{ needs.versioning.outputs.stable }} ]; then
+              SHOULD_SEMVER=true
             fi
-            if [ ${{ needs.versioning.outputs.preview }} == ${{ needs.versioning.outputs.development }} ]; then
-              SHOULD_SEMVER=false
+            if [ ${{ needs.versioning.outputs.preview }} != ${{ needs.versioning.outputs.development }} ]; then
+              SHOULD_SEMVER=true
             fi
           fi
           echo "SHOULD_SEMVER=$SHOULD_SEMVER" >> $GITHUB_ENV
