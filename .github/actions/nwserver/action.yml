@@ -56,7 +56,7 @@ outputs:
 runs:
   using: "composite"
   steps:
-    - uses: "actions/checkout@v3"
+    - uses: "actions/checkout@v4"
     - name: Clone SteamRE/DepotDownloader
       shell: bash
       run: |
