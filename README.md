@@ -1,6 +1,6 @@
 # <b>nwserver</b>
 
-Last Updated: `Tue Oct  1 00:35:28 UTC 2024`
+Last Updated: `Wed Oct  2 00:35:40 UTC 2024`
 
 ## Overview:
 This repository automates the Docker build process for nwserver and distributing the built images across multiple registries. Daily builds are performed to ensure that the images are up to date with the latest version of nwserver. The images are built using the latest version of nwserver available on Steam.
@@ -34,23 +34,31 @@ Tags:
 ---
 
 ### Development
-`8193.36.13`
+`8193.37.11`
 
 Tags: 
 
 - `ghcr.io/urothis/nwserver:development`
+- `ghcr.io/urothis/nwserver:8193.37.11`
 - `ghcr.io/urothis/nwserver:development-buster`
+- `ghcr.io/urothis/nwserver:8193.37.11-buster`
 - `ghcr.io/urothis/nwserver:development-bullseye`
+- `ghcr.io/urothis/nwserver:8193.37.11-bullseye`
 - `ghcr.io/urothis/nwserver:development-bookworm`
+- `ghcr.io/urothis/nwserver:8193.37.11-bookworm`
 ---
 - `urothis/nwserver:development`
+- `urothis/nwserver:8193.37.11`
 - `urothis/nwserver:development-buster`
+- `urothis/nwserver:8193.37.11-buster`
 - `urothis/nwserver:development-bullseye`
+- `urothis/nwserver:8193.37.11-bullseye`
 - `urothis/nwserver:development-bookworm`
+- `urothis/nwserver:8193.37.11-bookworm`
 ---
 
 ### Preview
-`8193.37.10`
+`8193.37.11`
 
 Tags: 
 
