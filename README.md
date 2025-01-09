@@ -1,6 +1,6 @@
 # <b>nwserver</b>
 
-Last Updated: `Thu Jan  9 00:39:23 UTC 2025`
+Last Updated: `Thu Jan  9 22:53:47 UTC 2025`
 
 ## Overview:
 This repository automates the Docker build process for nwserver and distributing the built images across multiple registries. Daily builds are performed to ensure that the images are up to date with the latest version of nwserver. The images are built using the latest version of nwserver available on Steam.
@@ -10,27 +10,27 @@ The images are built for the following platforms:
 - `linux/arm64`
 
 ### Stable
-`8193.36.13`
+`8193.37.13`
 
 Tags: 
 
 - `ghcr.io/urothis/nwserver:stable`
-- `ghcr.io/urothis/nwserver:8193.36.13`
+- `ghcr.io/urothis/nwserver:8193.37.13`
 - `ghcr.io/urothis/nwserver:stable-buster`
-- `ghcr.io/urothis/nwserver:8193.36.13-buster`
+- `ghcr.io/urothis/nwserver:8193.37.13-buster`
 - `ghcr.io/urothis/nwserver:stable-bullseye`
-- `ghcr.io/urothis/nwserver:8193.36.13-bullseye`
+- `ghcr.io/urothis/nwserver:8193.37.13-bullseye`
 - `ghcr.io/urothis/nwserver:stable-bookworm`
-- `ghcr.io/urothis/nwserver:8193.36.13-bookworm`
+- `ghcr.io/urothis/nwserver:8193.37.13-bookworm`
 ---
 - `urothis/nwserver:stable`
-- `urothis/nwserver:8193.36.13`
+- `urothis/nwserver:8193.37.13`
 - `urothis/nwserver:stable-buster`
-- `urothis/nwserver:8193.36.13-buster`
+- `urothis/nwserver:8193.37.13-buster`
 - `urothis/nwserver:stable-bullseye`
-- `urothis/nwserver:8193.36.13-bullseye`
+- `urothis/nwserver:8193.37.13-bullseye`
 - `urothis/nwserver:stable-bookworm`
-- `urothis/nwserver:8193.36.13-bookworm`
+- `urothis/nwserver:8193.37.13-bookworm`
 ---
 
 ### Development
@@ -39,22 +39,14 @@ Tags:
 Tags: 
 
 - `ghcr.io/urothis/nwserver:development`
-- `ghcr.io/urothis/nwserver:8193.37.13`
 - `ghcr.io/urothis/nwserver:development-buster`
-- `ghcr.io/urothis/nwserver:8193.37.13-buster`
 - `ghcr.io/urothis/nwserver:development-bullseye`
-- `ghcr.io/urothis/nwserver:8193.37.13-bullseye`
 - `ghcr.io/urothis/nwserver:development-bookworm`
-- `ghcr.io/urothis/nwserver:8193.37.13-bookworm`
 ---
 - `urothis/nwserver:development`
-- `urothis/nwserver:8193.37.13`
 - `urothis/nwserver:development-buster`
-- `urothis/nwserver:8193.37.13-buster`
 - `urothis/nwserver:development-bullseye`
-- `urothis/nwserver:8193.37.13-bullseye`
 - `urothis/nwserver:development-bookworm`
-- `urothis/nwserver:8193.37.13-bookworm`
 ---
 
 ### Preview
