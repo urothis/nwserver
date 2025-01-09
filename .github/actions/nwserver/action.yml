@@ -103,7 +103,7 @@ runs:
     - name: Install Neverwinter.nim
       shell: bash
       run: |
-        wget -O nwn-nim.zip https://github.com/niv/neverwinter.nim/releases/download/1.7.1/neverwinter.linux.amd64.zip
+        wget -O nwn-nim.zip https://github.com/niv/neverwinter.nim/releases/download/2.0.1/neverwinter.linux.amd64.zip
         unzip -j nwn-nim.zip nwn_resman_pkg -d /usr/local/bin/
         chmod +x /usr/local/bin/nwn_resman_pkg
         echo /usr/local/bin/ >> $GITHUB_PATH
