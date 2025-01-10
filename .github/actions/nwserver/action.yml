@@ -115,7 +115,7 @@ runs:
       run: |
         cd ${{ inputs.nwn_content_depot_id }}/*/
         mkdir -p ${{ github.workspace }}/docker/data/data
-        nwn_resman_pkg --userdirectory . -d ${{ github.workspace }}/docker/data/data
+        nwn_resman_pkg --userdirectory . -d ${{ github.workspace }}/docker/data/data -k nwn_base
     - name: Assemble other nwserver files
       shell: bash
       run: |
