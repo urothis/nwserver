@@ -1,6 +1,6 @@
 # <b>nwserver</b>
 
-Last Updated: `Thu Mar 13 00:40:13 UTC 2025`
+Last Updated: `Thu Mar 13 19:15:54 UTC 2025`
 
 ## Overview:
 This repository automates the Docker build process for nwserver and distributing the built images across multiple registries. Daily builds are performed to ensure that the images are up to date with the latest version of nwserver. The images are built using the latest version of nwserver available on Steam.
@@ -10,31 +10,31 @@ The images are built for the following platforms:
 - `linux/arm64`
 
 ### Stable
-`8193.37.14`
+`8193.37.15`
 
 Tags: 
 
 - `ghcr.io/urothis/nwserver:stable`
-- `ghcr.io/urothis/nwserver:8193.37.14`
+- `ghcr.io/urothis/nwserver:8193.37.15`
 - `ghcr.io/urothis/nwserver:stable-buster`
-- `ghcr.io/urothis/nwserver:8193.37.14-buster`
+- `ghcr.io/urothis/nwserver:8193.37.15-buster`
 - `ghcr.io/urothis/nwserver:stable-bullseye`
-- `ghcr.io/urothis/nwserver:8193.37.14-bullseye`
+- `ghcr.io/urothis/nwserver:8193.37.15-bullseye`
 - `ghcr.io/urothis/nwserver:stable-bookworm`
-- `ghcr.io/urothis/nwserver:8193.37.14-bookworm`
+- `ghcr.io/urothis/nwserver:8193.37.15-bookworm`
 ---
 - `urothis/nwserver:stable`
-- `urothis/nwserver:8193.37.14`
+- `urothis/nwserver:8193.37.15`
 - `urothis/nwserver:stable-buster`
-- `urothis/nwserver:8193.37.14-buster`
+- `urothis/nwserver:8193.37.15-buster`
 - `urothis/nwserver:stable-bullseye`
-- `urothis/nwserver:8193.37.14-bullseye`
+- `urothis/nwserver:8193.37.15-bullseye`
 - `urothis/nwserver:stable-bookworm`
-- `urothis/nwserver:8193.37.14-bookworm`
+- `urothis/nwserver:8193.37.15-bookworm`
 ---
 
 ### Development
-`8193.37.14`
+`8193.37.15`
 
 Tags: 
 
@@ -50,7 +50,7 @@ Tags:
 ---
 
 ### Preview
-`8193.37.14`
+`8193.37.15`
 
 Tags: 
 
