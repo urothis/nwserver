@@ -1,6 +1,6 @@
 # <b>nwserver</b>
 
-Last Updated: `Wed Mar 26 00:37:12 UTC 2025`
+Last Updated: `Thu Mar 27 00:33:12 UTC 2025`
 
 ## Overview:
 This repository automates the Docker build process for nwserver and distributing the built images across multiple registries. Daily builds are performed to ensure that the images are up to date with the latest version of nwserver. The images are built using the latest version of nwserver available on Steam.
