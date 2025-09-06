@@ -76,7 +76,7 @@ jobs:
           DEVELOPMENT: ${{ needs.versioning.outputs.development }}
           PREVIEW: ${{ needs.versioning.outputs.preview }}
         run: |
-          ADDITIONAL_TAGS=("" "-buster" "-bullseye" "-bookworm")
+          ADDITIONAL_TAGS=("" "-bookworm")
           REGISTRIES=("ghcr.io/urothis/nwserver" "urothis/nwserver")
 
           if [[ "$STABLE" != "$DEVELOPMENT" ]]; then
